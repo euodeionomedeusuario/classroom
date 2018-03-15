@@ -12,6 +12,8 @@ $(document).ready(function() {
   /*Habilitando modal*/
   $(".modal-trigger").leanModal();
 
+  $('.chips').material_chip();
+
   $("#btn-remove-task").click(function(event){
     var classId = $("#class-id").val();
     var taskId = $(this).siblings("#task-id").val();

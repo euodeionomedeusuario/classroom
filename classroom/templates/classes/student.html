@@ -39,13 +39,32 @@
         {% for task in tasks %}
         <div class="card">
           <div class="card-content">
-            <span class="card-title">{{ task.title }}</span>
-            <p>{{ task.description }}</p>
+            <div class="row">
+              <span class="card-title">{{ task.title }}</span>
+            </div>
 
-            <label>Anexos</label>
-            <p><a href="http://127.0.0.1:6543/quiz/{{ task.class._id }}/tests/{{ task.test._id }}">{{ task.test.name }}</a></p>
+            <div class="row">
+              <p>{{ task.description }}</p>
+            </div>
 
-            <p>O prazo desta tarefa é {{ task.deadline }}</p>
+            <div class="row">
+              <label>Anexos</label>
+            </div>
+
+            <div class="row">
+              <p><a href="http://127.0.0.1:6543/quiz/{{ task.class._id }}/tests/{{ task.test._id }}">{{ task.test.name }}</a></p>
+            </div>
+
+            <div class="row">
+              <label>Prazo</label>
+            </div>
+
+            <div class="row">
+
+              <div class="chip">
+                {{ task.deadline }}
+              </div>
+            </div>
           </div>
         </div>
         {% endfor %}
