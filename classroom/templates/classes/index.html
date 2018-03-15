@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Classroom</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+
+    <script src="{{ url_for('static', filename='js/class.js') }}"></script>
+
+  </head>
+  <body>
+    <!-- menu de navegação -->
+    <nav class="nav-extended red">
+      <div class="nav-wrapper">
+        <a href="/classroom/" class="brand-logo center">Classroom</a>
+        <ul id="slide-out" class="side-nav">
+          <li><a href="/classroom/logout/">Sair<i class="material-icons right">exit_to_app</i></a></li>
+        </ul>
+        <a data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="card">
+        <div class="card-content">
+          <input type="hidden" id="class-id" value="{{ c._id }}">
+          <h4 class="card-title">{{ c.name }}</h4>
+          <h5>{{ c.description }}</h5>
+        </div>
+        <div class="card-action">
+          <a id="btn-new-task-modal" href="#new-task-modal" class="btn modal-trigger waves-effect waves-light red white-text">Nova Tarefa
+            <i class="material-icons right">add</i>
+          </a>
+          <a href="#edit-class-modal" class="modal-trigger btn waves-effect waves-light red white-text">Editar
+            <i class="material-icons right">edit</i>
+          </a>
+          <a id="btn-remove-class" class="btn waves-effect waves-light red white-text">Remover
+            <i class="material-icons right">remove</i>
+          </a>
+          <a href="#share-class-modal" class="btn modal-trigger waves-effect waves-light red white-text">Compartilhar
+            <i class="material-icons right">share</i>
+          </a>
+        </div>
+      </div>
+
+      {% if tasks %}
+        {% for task in tasks %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">{{ task.title }}</span>
+            <p>{{ task.description }}</p>
+
+            <label>Anexos</label>
+            <p><a href="http://127.0.0.1:6543/quiz/{{ task.class._id }}/tests/{{ task.test._id }}">{{ task.test.name }}</a></p>
+
+            <p>O prazo desta tarefa é {{ task.deadline }}</p>
+          </div>
+          <div class="card-action">
+            <input type="hidden" value="{{ task._id }}" id="task-id">
+
+            <a class="btn waves-effect waves-light red white-text">Editar
+              <i class="material-icons right">edit</i>
+            </a>
+            <a id="btn-remove-task" class="btn waves-effect waves-light red white-text">Remover
+              <i class="material-icons right">remove</i>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <!-- modal de edição -->
+    <div id="edit-class-modal" class="modal">
+      <div class="modal-content">
+        <h4>Editando classe</h4>
+        <label>Nome</label>
+        <input type="text" id="modal-class-name">
+        <label>Descrição</label>
+        <input type="text" id="modal-class-description">
+      </div>
+      <div class="modal-footer">
+        <a id="btn-edit-class" class="modal-action modal-close waves-effect waves-green btn-flat">Salvar</a>
+        <a class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+      </div>
+    </div>
+
+    <div id="share-class-modal" class="modal">
+      <div class="modal-content">
+        <div class="row">
+          <h4>Compartilhando turma</h4>
+        </div>
+
+        <div class="row">
+          <label>ID</label>
+          <p id="modal-class-id"></p>
+        </div>
+
+        <div class="row">
+          <label>E-mail</label>
+          <input type="email" id="modal-class-email">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a id="btn-share-class" class="modal-action modal-close waves-effect waves-red btn-flat">Compartilhar</a>
+        <a class="modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a>
+      </div>
+    </div>
+
+    <!-- modal de compartilhamento de testes -->
+    <div id="new-task-modal" class="modal">
+      <div class="modal-content">
+        <div class="row">
+          <h4>Criando nova tarefa</h4>
+        </div>
+        <div class="row">
+          <label>Título</label>
+          <input type="text" id="title">
+        </div>
+
+        <div class="row">
+          <label>Descrição</label>
+          <textarea id="description" class="materialize-textarea"></textarea>
+        </div>
+
+        <div class="row">
+          <label>Questionário</label>
+          <select id="test"></select>
+        </div>
+
+        <div class="row">
+          <label>Prazo</label>
+          <input id="deadline" type="date">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a id="btn-create-task" class="modal-action modal-close waves-effect waves-red btn-flat">Criar</a>
+        <a class="modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Classroom</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+
+    <script src="{{ url_for('static', filename='js/class.js') }}"></script>
+
+  </head>
+  <body>
+    <!-- menu de navegação -->
+    <nav class="nav-extended red">
+      <div class="nav-wrapper">
+        <a href="/classroom/" class="brand-logo center">Classroom</a>
+        <ul id="slide-out" class="side-nav">
+          <li><a href="/classroom/logout/">Sair<i class="material-icons right">exit_to_app</i></a></li>
+        </ul>
+        <a data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="card">
+        <div class="card-content">
+          <input type="hidden" id="class-id" value="{{ c._id }}">
+          <h4 class="card-title">{{ c.name }}</h4>
+          <h5>{{ c.description }}</h5>
+        </div>
+      </div>
+
+      {% if tasks %}
+        {% for task in tasks %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">{{ task.title }}</span>
+            <p>{{ task.description }}</p>
+
+            <label>Anexos</label>
+            <p><a href="http://127.0.0.1:6543/quiz/{{ task.class._id }}/tests/{{ task.test._id }}">{{ task.test.name }}</a></p>
+
+            <p>O prazo desta tarefa é {{ task.deadline }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </body>
+</html>

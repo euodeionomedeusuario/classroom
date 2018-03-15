@@ -1,0 +1,77 @@
+<!doctype html>
+
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <title>Classroom</title>
+
+        <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+        <script src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+
+        <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+
+    </head>
+    <body>
+
+      <!-- menu de navegação -->
+      <nav class="nav-extended red">
+        <div class="nav-wrapper">
+          <a href="/classroom/" class="brand-logo center">Classroom</a>
+          <ul id="slide-out" class="side-nav">
+            <li><a href="/classroom/logout/">Sair<i class="material-icons right">exit_to_app</i></a></li>
+          </ul>
+          <a data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
+        </div>
+      </nav>
+
+      <!-- lista de turmas -->
+      <div class="container">
+        {% if classes %}
+          {% for class in classes %}
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title"><a href="/classroom/classes/{{ class._id }}/">{{ class.name }}</a></span>
+                <p>{{ class.description }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+
+        <!-- lista de turmas -->
+        {% if classes %}
+          {% for class in my_classes %}
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title"><a href="/classroom/user/{{ user }}/classes/{{ class._id }}/">{{ class.name }}</a></span>
+                <p>{{ class.description }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+
+        <div class="fixed-action-btn">
+          <a href="#new-class-modal" class="modal-trigger btn-floating waves-effect waves-light btn-large red">
+            <i class="large material-icons">add</i>
+          </a>
+        </div>
+      </div>
+
+      <!-- modal de criação de nova turma -->
+      <div id="new-class-modal" class="modal">
+        <div class="modal-content">
+          <h4>Criando nova turma</h4>
+          <label>Nome</label>
+          <input type="text" id="name">
+
+          <label>Descrição</label>
+          <textarea id="description" class="materialize-textarea"></textarea>
+        </div>
+        <div class="modal-footer">
+          <a id="btn-create-class" class="modal-action modal-close waves-effect waves-green btn-flat">Criar</a>
+          <a class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+        </div>
+      </div>
+    </body>
+</html>
