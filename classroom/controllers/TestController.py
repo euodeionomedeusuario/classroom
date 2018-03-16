@@ -57,12 +57,12 @@ def get_test_by_id(class_id, test_id):
     except:
         return render_template("errors/404.html"), 404
 
-    #user = db.users.find_one({"_id": ObjectId(session["_id"])})
+    user = db.users.find_one({"_id": ObjectId(session["_id"])})
 
-    #classe = db.classes.find_one( {"_id": ObjectId(turma["_id"]), "participants": {"$in": user}} )
+    classe = db.classes.find_one( {"_id": ObjectId(turma["_id"]), "participants": {"$in": user}} )
 
-    #if classe == None:
-    #    return render_template("errors/403.html"), 403
+    if classe == None:
+        return render_template("errors/403.html"), 403
 
     answer = db.answers.find_one({"user._id": ObjectId(session["_id"]), "test._id": test["_id"]})
 
