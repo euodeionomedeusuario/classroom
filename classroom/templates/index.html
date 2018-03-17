@@ -20,6 +20,7 @@
         <div class="nav-wrapper">
           <a href="/classroom/" class="brand-logo center">Classroom</a>
           <ul id="slide-out" class="side-nav">
+            <li><a href="#modal-signup-in-class" class="modal-trigger">Inscrever-se em turma</a></li>
             <li><a href="/classroom/logout/">Sair<i class="material-icons right">exit_to_app</i></a></li>
           </ul>
           <a data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
@@ -71,6 +72,24 @@
         <div class="modal-footer">
           <a id="btn-create-class" class="modal-action modal-close waves-effect waves-green btn-flat">Criar</a>
           <a class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+        </div>
+      </div>
+
+      <!-- modal para inscrição em turma pelo ID -->
+      <div id="modal-signup-in-class" class="modal">
+        <div class="modal-content">
+          <div class="row">
+            <h4>Inscrevendo-se em nova turma</h4>
+          </div>
+          <div class="row">
+            <label>ID da Turma</label>
+            <input type="text" id="modal-class-id">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <a id="btn-signup-in-class" class="btn-flat waves-green waves-effect modal-action modal-close">Inscrever-se</a>
+          <a class="btn-flat waves-green waves-effect modal-action modal-close">Cancelar</a>
         </div>
       </div>
     </body>

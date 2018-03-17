@@ -18,9 +18,10 @@
       <!-- menu de navegação -->
       <nav class="nav-extended blue darken-1">
         <div class="nav-wrapper">
-          <a href="/quiz" class="brand-logo center">Quiz</a>
+          <a class="brand-logo center">Quiz</a>
           <ul id="slide-out" class="side-nav">
-            <li><a href="/quiz/logout/">Sair<i class="material-icons right">exit_to_app</i></a></li>
+            <li><a href="/classroom/">Classroom | Quiz</a></li>
+            <li><a href="/classroom/logout/">Sair<i class="material-icons right">exit_to_app</i></a></li>
           </ul>
           <a data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
         </div>
@@ -32,7 +33,6 @@
             <div class="card-content">
               <input type="hidden" id="test-time" value="{{ test.time }}">
               <input type="hidden" id="test-id" value="{{ test._id }}">
-              <input type="hidden" id="test-type" value="{{ test.questions[0].type }}">
                 <label>Nome</label>
                 <h5>{{ test.name }}</h5>
                 <label>Descrição</label>

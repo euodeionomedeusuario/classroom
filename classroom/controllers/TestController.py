@@ -59,7 +59,7 @@ def get_test_by_id(class_id, test_id):
 
     user = db.users.find_one({"_id": ObjectId(session["_id"])})
 
-    classe = db.classes.find_one( {"_id": ObjectId(turma["_id"]), "participants": {"$in": user}} )
+    classe = db.classes.find_one( {"_id": ObjectId(turma["_id"]), "participants": {"$in": [ObjectId(user["_id"])]}} )
 
     if classe == None:
         return render_template("errors/403.html"), 403
@@ -90,7 +90,7 @@ def get_test_by_id(class_id, test_id):
     return render_template("tests/answer.html", test=test, num_attempts=1)
 
 
-
+#retornando testes criados
 @app.route("/classroom/tests/", methods=["GET"])
 def get_all_tests():
     result = db.tests.find({"creator._id": ObjectId(session["_id"])})

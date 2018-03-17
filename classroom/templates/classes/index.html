@@ -13,6 +13,32 @@
 
     <script src="{{ url_for('static', filename='js/class.js') }}"></script>
 
+    <script>
+      function acceptInvite(invite) {
+        var classId = $("#class-id").val();
+
+        $.ajax({
+          url: "http://127.0.0.1:6543/classroom/invites/" + invite + "/",
+          type: "GET",
+          success: function(event){
+            window.location.replace("http://127.0.0.1:6543/classroom/classes/" + classId);
+          }
+        });
+      }
+
+      function refuseInvite(invite) {
+        var classId = $("#class-id").val();
+
+        $.ajax({
+          url: "http://127.0.0.1:6543/classroom/invites/" + invite + "/",
+          type: "DELETE",
+          success: function(event){
+            window.location.replace("http://127.0.0.1:6543/classroom/classes/" + classId);
+          }
+        });
+      }
+    </script>
+
   </head>
   <body>
     <!-- menu de navegação -->
@@ -48,6 +74,23 @@
           </a>
         </div>
       </div>
+
+      {% if invites %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Convites</span>
+              {% for invite in invites %}
+                <div>
+                  <h5>{{ invite.user.name }}</h5>
+                  <a onclick="acceptInvite('{{ invite._id }}');" class="btn green waves-effect waves-light">Aceitar</a>
+                  <a onclick="refuseInvite('{{ invite._id }}');" class="btn red waves-effect waves-light">Recusar</a>
+                </div>
+              {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+
 
       {% if tasks %}
         {% for task in tasks %}
@@ -113,7 +156,7 @@
       </div>
     </div>
 
-    <!-- modal de compartilhamento de testes -->
+    <!-- modal de crição de tarefas -->
     <div id="new-task-modal" class="modal">
       <div class="modal-content">
         <div class="row">

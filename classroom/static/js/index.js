@@ -9,6 +9,20 @@ $(document).ready(function(){
   /*Habilitando modal*/
   $(".modal-trigger").leanModal();
 
+
+  /*registrando-se em nova turma*/
+  $("#btn-signup-in-class").click(function(event) {
+    var classId = $("#modal-class-id").val();
+
+    $.ajax({
+      url: "http://127.0.0.1:6543/classroom/classes/" + classId + "/invites/",
+      type: "POST",
+      success: function(event){
+        window.location.replace("http://127.0.0.1:6543/classroom/");
+      }
+    });
+  });
+
   $("#btn-create-class").click(function(event) {
     var name = $("#name").val();
     var description = $("#description").val();
