@@ -7,7 +7,7 @@ from classroom import app
 from classroom import db
 
 
-#registrando pedido para entrar em turma
+#aceitando pedido para entrar em turma
 @app.route("/classroom/invites/<invite_id>/", methods=["GET"])
 def accept_invite(invite_id):
     try:
@@ -15,8 +15,8 @@ def accept_invite(invite_id):
         user = db.users.find_one( {"_id": invite["user"]["_id"]} )
 
         db.classes.update({"_id": invite["class"]["_id"]}, {"$addToSet": {"participants": user["_id"]}})
+        db.invites.remove({"_id": ObjectId(invite_id)})
 
-        db.invite.remove({"_id": invite_id})
     except Exception as error:
         print(error)
 

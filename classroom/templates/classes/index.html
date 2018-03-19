@@ -162,6 +162,9 @@
         <div class="row">
           <h4>Criando nova tarefa</h4>
         </div>
+        <div class="row" style="{display: none}">
+          <p id="modal-new-task-error"></p>
+        </div>
         <div class="row">
           <label>Título</label>
           <input type="text" id="title">
@@ -183,7 +186,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <a id="btn-create-task" class="modal-action modal-close waves-effect waves-red btn-flat">Criar</a>
+        <a id="btn-create-task" class="waves-effect waves-red btn-flat">Criar</a>
         <a class="modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a>
       </div>
     </div>

@@ -12,6 +12,16 @@ $(document).ready(function() {
   /*Habilitando modal*/
   $(".modal-trigger").leanModal();
 
+  function isRetroativeDate(date) {
+    var currentDate = new Date();
+
+    if (date >= currentDate) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   $("#btn-remove-task").click(function(event){
     var classId = $("#class-id").val();
     var taskId = $(this).siblings("#task-id").val();
@@ -93,19 +103,25 @@ $(document).ready(function() {
 
   /*Criando uma nova tarefa*/
   $("#btn-create-task").click(function(event) {
-    var classId = $("#class-id").val();
-    var title = $("#title").val();
-    var description = $("#description").val();
     var deadline = $("#deadline").val();
-    var test = $("#test :checked").val();
 
-    $.ajax({
-      url: "http://127.0.0.1:6543/classroom/tasks/",
-      type: "POST",
-      data: {title: title, description: description, deadline: deadline, classId: classId, test: test},
-      success: function(data) {
-        window.location.replace("http://127.0.0.1:6543/classroom/classes/" + classId);
-      }
-    });
+    if(isRetroativeDate(deadline) == false) {
+      var classId = $("#class-id").val();
+      var title = $("#title").val();
+      var description = $("#description").val();
+      var deadline = $("#deadline").val();
+      var test = $("#test :checked").val();
+
+      $.ajax({
+        url: "http://127.0.0.1:6543/classroom/tasks/",
+        type: "POST",
+        data: {title: title, description: description, deadline: deadline, classId: classId, test: test},
+        success: function(data) {
+          window.location.replace("http://127.0.0.1:6543/classroom/classes/" + classId);
+        }
+      });
+    } else {
+      $("#modal-new-task-error").css("display", "block").css("color", "red").text("Escolha um prazo válido!");
+    }
   });
 });

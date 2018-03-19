@@ -5,9 +5,23 @@ from classroom import app
 from classroom import db
 
 
-#respondendo o quiz
+#enviando uma nova answer
 @app.route("/quiz/tests/<test_id>/answers/", methods=["POST"])
 def send_answer(test_id):
+    #verificando se existir uma resposta anterior
+    last_answer = db.answers.find_one({
+        "test._id": ObjectId(test_id),
+        "user._id": ObjectId(session["_id"])
+    })
+
+    if last_answer:
+        num_attempts = int(last_answer["numAttempts"]) + 1
+
+        #apagando resposta anterior
+        db.answers.remove({"_id": last_answer["_id"]})
+    else:
+        num_attempts = 1
+
     answers = request.form.getlist("answers[]")
     values = request.form.getlist("values[]")
 
@@ -24,11 +38,16 @@ def send_answer(test_id):
     num_questions = len(test["questions"])
     num_correct_questions = 0
 
+    questions = []
+
     #analisando se a questão está certa
     for answer, value in zip(answers, values):
-        for question in test["questions"]:
+        for id in test["questions"]:
+            question = db.questions.find_one({"_id": ObjectId(id)})
+
             if value == str(question["_id"]):
                 question["answer"] = answer
+                questions.append(question)
 
                 if question["type"] == "trueOrFalse" or question["type"] == "multipleChoice":
                     if question["correctAnswer"] == question["answer"]:
@@ -41,7 +60,8 @@ def send_answer(test_id):
         "user": user,
         "test": test,
         "grade": grade,
-        "attempt": 0
+        "numAttempts": num_attempts,
+        "answers": questions
     })
 
     return "OK"
@@ -66,19 +86,21 @@ def get_test_by_id(class_id, test_id):
 
     answer = db.answers.find_one({"user._id": ObjectId(session["_id"]), "test._id": test["_id"]})
 
-    #num_attempts = test["numAttempts"]
+    num_attempts = int(test["numAttempts"])
 
-    #if answer:
-    #    num_attempts -= answer["attempt"]
+    if answer:
+        num_attempts -= int(answer["numAttempts"])
 
-    #    if num_attempts == 0:
-    #        return render_template("errors/403.html"), 403
+        if num_attempts == 0:
+            return render_template("errors/403.html"), 403
 
     test["_id"] = str(test["_id"])
     test["creator"]["_id"] = str(test["creator"]["_id"])
 
     questions = []
-    for item in test["questions"]:
+    for id in test["questions"]:
+        item = db.questions.find_one({"_id": ObjectId(id)})
+
         if item["_id"]:
             item["_id"] = str(item["_id"])
             item["topic"]["_id"] = str(item["topic"]["_id"])
@@ -87,7 +109,7 @@ def get_test_by_id(class_id, test_id):
 
     test["questions"] = questions
 
-    return render_template("tests/answer.html", test=test, num_attempts=1)
+    return render_template("tests/answer.html", test=test, num_attempts=num_attempts)
 
 
 #retornando testes criados
