@@ -5,6 +5,47 @@ from classroom import app
 from classroom import db
 
 
+#Retornando um teste pelo ID
+@app.route("/quiz/tests/<test_id>/answers/", methods=["GET"])
+def test(test_id):
+    test = db.tests.find_one(
+           {
+                "_id" : ObjectId(test_id)
+           })
+
+    test["_id"] = str(test["_id"])
+    test["creator"]["_id"] = str(test["creator"]["_id"])
+
+    questions = []
+
+    for id in test["questions"]:
+        question = db.questions.find_one({"_id": ObjectId(id)})
+
+        if question["type"] == "multipleChoice":
+            questions.append({
+                "_id": str(question["_id"]),
+                "title": question["title"],
+                "type": question["type"],
+                "correctAnswer": question["correctAnswer"],
+                "choices": question["choices"]
+            })
+        else:
+            questions.append({
+                "_id": str(question["_id"]),
+                "title": question["title"],
+                "type": question["type"],
+                "correctAnswer": question["correctAnswer"]
+            })
+
+
+    answers = db.answers.find(
+              {
+                "test._id" : ObjectId(test_id)
+              })
+
+    return render_template("tests/verify.html", test=test, answers=answers, questions=questions)
+
+
 #enviando uma nova answer
 @app.route("/quiz/tests/<test_id>/answers/", methods=["POST"])
 def send_answer(test_id):

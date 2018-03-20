@@ -12,7 +12,8 @@ $(document).ready(function() {
   /*Habilitando modal*/
   $(".modal-trigger").leanModal();
 
-  function isRetroativeDate(date) {
+  function isRetroativeDate(deadline) {
+    var date = new Date(deadline);
     var currentDate = new Date();
 
     if (date >= currentDate) {
