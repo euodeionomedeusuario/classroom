@@ -16,3 +16,15 @@ def index():
         return render_template("index.html", classes=classes, my_classes=my_classes, user=session["_id"])
 
     return redirect("/classroom/login/")
+
+@app.route("/classroom/quiz/", methods=["GET"])
+def index_quiz():
+    if "email" in session:
+        created_tests = db.tests.find(
+                        {
+                            "creator._id" : session["_id"]
+                        })
+
+        return render_template("quiz/index.html", created_tests=created_tests)
+
+    return redirect("/classroom/login/")

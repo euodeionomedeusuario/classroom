@@ -52,11 +52,21 @@
           {% endfor %}
         {% endif %}
 
-        <div class="fixed-action-btn">
-          <a href="#new-class-modal" class="modal-trigger btn-floating waves-effect waves-light btn-large red">
-            <i class="large material-icons">add</i>
-          </a>
-        </div>
+        <div class="fixed-action-btn vertical click-to-toggle">
+         <a class="btn-floating btn-large red">
+           <i class="material-icons">menu</i>
+         </a>
+         <ul>
+           <li>
+             <a href="#new-class-modal" class="modal-trigger">Nova Turma</a>
+           </li>
+
+           <li>
+             <a href="/classroom/quiz/tests/" class="modal-trigger">Novo Teste</a>
+           </li>
+         </ul>
+       </div>
+
       </div>
 
       <!-- modal de criação de nova turma -->

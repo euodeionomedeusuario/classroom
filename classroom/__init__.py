@@ -18,3 +18,7 @@ from classroom.controllers import UserController
 from classroom.controllers import ClassController
 from classroom.controllers import TaskController
 from classroom.controllers import TestController
+from classroom.controllers import AnswerController
+from classroom.controllers import CourseController
+from classroom.controllers import QuestionController
+from classroom.controllers import TopicController
