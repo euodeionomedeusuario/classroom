@@ -22,7 +22,7 @@ def index_quiz():
     if "email" in session:
         created_tests = db.tests.find(
                         {
-                            "creator._id" : session["_id"]
+                            "creator._id" : ObjectId(session["_id"])
                         })
 
         return render_template("quiz/index.html", created_tests=created_tests)

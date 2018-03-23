@@ -72,7 +72,7 @@ def create_test(course, topic):
 
 
 #Criando teste
-@app.route("/classroom/tests/", methods=["POST"])
+@app.route("/quiz/tests/", methods=["POST"])
 def save_test():
     name = request.form.get("name")
     description = request.form.get("description")
