@@ -5,7 +5,7 @@ from classroom import app
 from classroom import db
 
 #vendo os detalhes da reposta
-@app.route("/quiz/answers/<answer_id>/", methods=["GET"])
+@app.route("/classroom/quiz/answers/<answer_id>/", methods=["GET"])
 def see_answer(answer_id):
 
     answer = db.answers.find_one(
@@ -14,7 +14,7 @@ def see_answer(answer_id):
              })
     print(answer)
 
-    return render_template("answers/see.html", answer=answer)
+    return render_template("quiz/answers/see.html", answer=answer)
 
 
 #atualizando nota do quiz

@@ -101,7 +101,7 @@ def save_test():
 
 
 #Compartilhando teste
-@app.route("/classroom/tests/<test_id>/classes/", methods=["PUT"])
+@app.route("/quiz/tests/<test_id>/classes/", methods=["PUT"])
 def share_test(test_id):
     title = request.form.get("title")
     description = request.form.get("description")
@@ -125,7 +125,7 @@ def share_test(test_id):
     return "OK"
 
 #atualizando as informações do teste
-@app.route("/classroom/tests/<test_id>/", methods=["PUT"])
+@app.route("/quiz/tests/<test_id>/", methods=["PUT"])
 def update_test(test_id):
     name = request.form.get("name")
     description = request.form.get("description")
@@ -149,7 +149,7 @@ def update_test(test_id):
 
 
 #Retornando um teste pelo ID
-@app.route("/classroom/tests/<test_id>/answers/", methods=["GET"])
+@app.route("/classroom/quiz/tests/<test_id>/answers/", methods=["GET"])
 def test(test_id):
     test = db.tests.find_one(
            {
@@ -186,7 +186,7 @@ def test(test_id):
                 "test._id" : ObjectId(test_id)
               })
 
-    return render_template("tests/verify_test.html", test=test, answers=answers, questions=questions)
+    return render_template("quiz/tests/verify_test.html", test=test, answers=answers, questions=questions)
 
 
 #enviando uma nova answer

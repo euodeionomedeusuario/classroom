@@ -17,9 +17,10 @@
       <!-- menu de navegação -->
       <nav class="nav-extended blue">
         <div class="nav-wrapper">
-          <a href="/quiz" class="brand-logo center">Quiz</a>
+          <a href="/classroom/quiz/" class="brand-logo center">Quiz</a>
           <ul id="slide-out" class="side-nav">
-            <li><a href="/quiz/logout/">Sair<i class="material-icons right">exit_to_app</i></a></li>
+            <li><a href="/classroom/">Classroom</a></li>
+            <li><a href="/classroom/logout/">Sair<i class="material-icons right">exit_to_app</i></a></li>
           </ul>
           <a data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
         </div>
@@ -110,7 +111,7 @@
                 </div>
               </div>
               <div class="card-action">
-                  <a href="/quiz/answers/{{ answer._id}}" class="waves-effect waves-light btn blue white-text">Ver</i></a>
+                  <a href="/classroom/quiz/answers/{{ answer._id}}" class="waves-effect waves-light btn blue white-text">Ver</i></a>
               </div>
             {% endfor %}
           {% endif %}

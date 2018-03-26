@@ -62,7 +62,9 @@ def get_index_student(class_id, user_id):
 
     user = db.users.find_one({"_id": ObjectId(session["_id"])})
 
-    return render_template("classes/student.html", c=classe, tasks=tasks, user=user)
+    warnings = db.warnings.find({"class._id": c["_id"]})
+
+    return render_template("classes/student.html", c=classe, tasks=tasks, user=user, warnings=warnings)
 
 
 #Criando uma nova turma
@@ -91,7 +93,9 @@ def get_class(class_id):
 
     invites = db.invites.find({"class._id": c["_id"]})
 
-    return render_template("classes/index.html", c=c, tasks=tasks, invites=invites)
+    warnings = db.warnings.find({"class._id": c["_id"]})
+
+    return render_template("classes/index.html", c=c, tasks=tasks, invites=invites, warnings=warnings)
 
 
 #removendo turma
