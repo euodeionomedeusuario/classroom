@@ -62,7 +62,7 @@ def get_index_student(class_id, user_id):
 
     user = db.users.find_one({"_id": ObjectId(session["_id"])})
 
-    warnings = db.warnings.find({"class._id": c["_id"]})
+    warnings = db.warnings.find({"class._id": classe["_id"]})
 
     return render_template("classes/student.html", c=classe, tasks=tasks, user=user, warnings=warnings)
 
