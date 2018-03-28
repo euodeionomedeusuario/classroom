@@ -46,6 +46,7 @@
       <div class="nav-wrapper">
         <a href="/classroom/" class="brand-logo center">Classroom</a>
         <ul id="slide-out" class="side-nav">
+          <li><a href="/classroom/quiz/">Quiz</a></li>
           <li><a href="/classroom/logout/">Sair<i class="material-icons right">exit_to_app</i></a></li>
         </ul>
         <a data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
@@ -58,23 +59,6 @@
           <input type="hidden" id="class-id" value="{{ c._id }}">
           <h4 class="card-title">{{ c.name }}</h4>
           <h5>{{ c.description }}</h5>
-        </div>
-        <div class="card-action">
-          <a id="btn-new-task-modal" href="#new-task-modal" class="btn modal-trigger waves-effect waves-light red white-text">Nova Tarefa
-            <i class="material-icons right">add</i>
-          </a>
-          <a href="#modal-new-warning" class="btn modal-trigger waves-effect waves-light red white-text">Novo Aviso
-            <i class="material-icons right">add</i>
-          </a>
-          <a href="#edit-class-modal" class="modal-trigger btn waves-effect waves-light red white-text">Editar
-            <i class="material-icons right">edit</i>
-          </a>
-          <a id="btn-remove-class" class="btn waves-effect waves-light red white-text">Remover
-            <i class="material-icons right">remove</i>
-          </a>
-          <a href="#share-class-modal" class="btn modal-trigger waves-effect waves-light red white-text">Compartilhar
-            <i class="material-icons right">share</i>
-          </a>
         </div>
       </div>
 
@@ -135,6 +119,34 @@
         </div>
         {% endfor %}
       {% endif %}
+
+      <div class="fixed-action-btn vertical click-to-toggle">
+       <a class="btn-floating btn-large red">
+         <i class="material-icons">menu</i>
+       </a>
+       <ul>
+         <li>
+           <a id="btn-new-task-modal" href="#new-task-modal" class="modal-trigger">Nova Tarefa</a>
+         </li>
+
+         <li>
+           <a href="#modal-new-warning" class="modal-trigger">Novo Aviso</a>
+         </li>
+
+         <li>
+           <a href="#edit-class-modal" class="modal-trigger">Editar Turma</a>
+         </li>
+
+         <li>
+           <a id="btn-remove-class">Apagar Turma</a>
+         </li>
+
+         <li>
+           <a href="#share-class-modal" class="modal-trigger">Convidar</a>
+         </li>
+       </ul>
+     </div>
+
     </div>
 
     <!-- modal de criação de novo aviso -->

@@ -69,7 +69,7 @@
                         <div class="answer">
                           {% for choice in question.choices %}
                             <p>
-                              <input class="blue" name="{{question.title}}" type="radio" id="{{question.title}}{{choice}}" value="{{choice}}">
+                              <input name="{{question.title}}" type="radio" id="{{question.title}}{{choice}}" value="{{choice}}">
                               <label for="{{question.title}}{{choice}}">{{choice}}</label>
                             </p>
                           {% endfor %}

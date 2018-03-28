@@ -2,7 +2,7 @@ from flask import session, jsonify, render_template, request
 
 import math
 from random import randint
-
+import random
 
 from bson.objectid import ObjectId
 
@@ -289,6 +289,8 @@ def get_test_by_id(class_id, test_id):
             item["_id"] = str(item["_id"])
             item["topic"]["_id"] = str(item["topic"]["_id"])
             item["topic"]["course"]["_id"] = str(item["topic"]["course"]["_id"])
+            if item["type"] == "multipleChoice":
+                random.shuffle(item["choices"])
         questions.append(item)
 
     test["questions"] = questions
