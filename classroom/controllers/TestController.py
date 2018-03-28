@@ -190,7 +190,7 @@ def test(test_id):
 
 
 #enviando uma nova answer
-@app.route("/classroom/tests/<test_id>/answers/", methods=["POST"])
+@app.route("/quiz/tests/<test_id>/answers/", methods=["POST"])
 def send_answer(test_id):
     #verificando se existir uma resposta anterior
     last_answer = db.answers.find_one({
@@ -252,7 +252,7 @@ def send_answer(test_id):
 
 
 #Retornando um teste pelo ID
-@app.route("/classroom/<class_id>/tests/<test_id>/", methods=["GET"])
+@app.route("/classroom/quiz/classes/<class_id>/tests/<test_id>/", methods=["GET"])
 def get_test_by_id(class_id, test_id):
     try:
         turma = db.classes.find_one( {"_id": ObjectId(class_id)} )
@@ -293,7 +293,7 @@ def get_test_by_id(class_id, test_id):
 
     test["questions"] = questions
 
-    return render_template("tests/answer_test.html", test=test, num_attempts=num_attempts)
+    return render_template("quiz/tests/answer_test.html", test=test, num_attempts=num_attempts)
 
 
 #retornando testes criados
