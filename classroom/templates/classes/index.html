@@ -63,6 +63,9 @@
           <a id="btn-new-task-modal" href="#new-task-modal" class="btn modal-trigger waves-effect waves-light red white-text">Nova Tarefa
             <i class="material-icons right">add</i>
           </a>
+          <a href="#modal-new-warning" class="btn modal-trigger waves-effect waves-light red white-text">Novo Aviso
+            <i class="material-icons right">add</i>
+          </a>
           <a href="#edit-class-modal" class="modal-trigger btn waves-effect waves-light red white-text">Editar
             <i class="material-icons right">edit</i>
           </a>
@@ -90,7 +93,19 @@
         </div>
       {% endif %}
 
-
+      {% if warnings %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Avisos</span>
+              {% for warning in warnings %}
+                <div>
+                  <p><b>{{ warning.title }}</b></p>
+                  <p>{{ warning.description }}</p>
+                </div>
+              {% endfor %}
+          </div>
+        </div>
+      {% endif %}
 
       {% if tasks %}
         {% for task in tasks %}
@@ -120,6 +135,21 @@
         </div>
         {% endfor %}
       {% endif %}
+    </div>
+
+    <!-- modal de criação de novo aviso -->
+    <div id="modal-new-warning" class="modal">
+      <div class="modal-content">
+        <h4>Criando novo aviso</h4>
+        <label>Título</label>
+        <input type="text" id="modal-warning-title">
+        <label>Descrição</label>
+        <input type="text" id="modal-warning-description">
+      </div>
+      <div class="modal-footer">
+        <a id="btn-create-warning" class="modal-action modal-close waves-effect waves-green btn-flat">Criar</a>
+        <a class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+      </div>
     </div>
 
     <!-- modal de edição -->

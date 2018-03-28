@@ -12,6 +12,22 @@ $(document).ready(function() {
   /*Habilitando modal*/
   $(".modal-trigger").leanModal();
 
+  $("#btn-create-warning").click(function(event){
+    var classId = $("#class-id").val();
+    var title = $("#modal-warning-title").val();
+    var description = $("#modal-warning-description").val();
+
+    $.ajax({
+      url: "http://127.0.0.1:6543/classroom/classes/" + classId + "/warnings/",
+      type: "POST",
+      data: {"title": title, "description": description, "created_at": new Date()},
+      success: function(data) {
+        window.location.replace("http://127.0.0.1:6543/classroom/classes/" + classId + "/");
+      }
+    });
+
+  });
+
   function isRetroativeDate(deadline) {
     var date = new Date(deadline);
     var currentDate = new Date();

@@ -55,7 +55,7 @@ $(document).ready(function(){
         "choices": choices
       },
       success: function(data) {
-          window.location.replace("http://127.0.0.1:6543/quiz/tests/" + testId + "/answers/");
+          window.location.replace("http://127.0.0.1:6543/classroom/quiz/tests/" + testId + "/answers/");
       }
     });
 
@@ -107,7 +107,7 @@ $(document).ready(function(){
       url: "http://127.0.0.1:6543/quiz/tests/" + testId + "/",
       type: "DELETE",
       success: function(data) {
-        window.location.replace("http://127.0.0.1:6543/quiz/");
+        window.location.replace("http://127.0.0.1:6543/classroom/quiz/");
       }
     });
   });
@@ -150,7 +150,7 @@ $(document).ready(function(){
       data: {name: name, description: description},
       success: function(data) {
         console.log("Test " + test + " updated in " + Date());
-        window.location.replace("http://127.0.0.1:6543/quiz/tests/" + test + "/answers/");
+        window.location.replace("http://127.0.0.1:6543/classroom/quiz/");
       }
     });
   });
@@ -170,7 +170,7 @@ $(document).ready(function(){
       data: {"test": test, "classe": classe, "title": title, "description": description, "deadline": deadline},
       success: function(data) {
         console.log("Test " + test + "shared in " + Date());
-        window.location.replace("http://127.0.0.1:6543/quiz/tests/" + test + "/answers/");
+        window.location.replace("http://127.0.0.1:6543/classroom/quiz/tests/" + test + "/answers/");
 
       }
     });

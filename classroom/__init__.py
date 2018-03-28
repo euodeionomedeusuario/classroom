@@ -22,3 +22,4 @@ from classroom.controllers import AnswerController
 from classroom.controllers import CourseController
 from classroom.controllers import QuestionController
 from classroom.controllers import TopicController
+from classroom.controllers import WarningController
