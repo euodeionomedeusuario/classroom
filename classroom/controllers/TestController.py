@@ -289,7 +289,7 @@ def get_test_by_id(class_id, test_id):
             item["_id"] = str(item["_id"])
             item["topic"]["_id"] = str(item["topic"]["_id"])
             item["topic"]["course"]["_id"] = str(item["topic"]["course"]["_id"])
-            if item["type"] == "multipleChoice":
+            if item["type"] == "multipleChoice" or item["type"] == "trueOrFalse":
                 random.shuffle(item["choices"])
         questions.append(item)
 

@@ -23,6 +23,7 @@ $(document).ready(function() {
       url: "http://127.0.0.1:6543/quiz/courses/",
       type: "GET",
       success: function(data) {
+        $("#nq-course").empty();
         for(index in data) {
           $("#nq-course").append(createCourse(data[index]));
         }

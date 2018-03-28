@@ -36,27 +36,6 @@
                 <label>Descrição</label>
                 <h5 id="description">{{ test.description }}</h5>
             </div>
-            <div class="card-action">
-              <div class="row">
-                <div class="col s12 m6 l6">
-                  <a id="call" class="col s12 m12 l12 waves-effect waves-light btn modal-trigger blue white-text" href="#modal1">Editar
-                    <i class="material-icons right">edit</i>
-                  </a>
-                </div>
-
-                <div class="col s12 m6 l6">
-                  <a id="btn-remove-test" class="col s12 m12 l12 waves-effect waves-light btn blue white-text">Remover
-                    <i class="material-icons right">remove</i>
-                  </a>
-                </div>
-
-                <div class="col s12 m6 l6">
-                  <a id="btn-share-test" class="col s12 m12 l12 waves-effect waves-light btn modal-trigger blue white-text" href="#new-task-modal">Compartilhar
-                    <i class="material-icons right">share</i>
-                  </a>
-                </div>
-              </div>
-            </div>
         </div>
 
         <!-- lista de questões -->
@@ -117,83 +96,102 @@
           {% endif %}
         </div>
 
-        <!-- modal de edição de questão -->
-        <div id="modal-edit-question" class="modal">
-          <div class="modal-content">
-            <div class="row">
-              <span class="card-title">Editando questão</span>
-            </div>
+        <div class="fixed-action-btn vertical click-to-toggle">
+         <a class="btn-floating btn-large blue">
+           <i class="material-icons">menu</i>
+         </a>
+         <ul>
+           <li>
+             <a id="call" class="modal-trigger" href="#modal1">Editar Teste</a>
+           </li>
 
-            <div class="row">
-              <label>Título</label>
-              <input id="modal-question-title" type="text">
-            </div>
+           <li>
+             <a id="btn-remove-test">Apagar Teste</a>
+           </li>
 
+           <li>
+             <a id="btn-share-test" class="modal-trigger" href="#new-task-modal">Compartilhar Teste</a>
+           </li>
+         </ul>
+       </div>
+
+      </div>
+
+      <!-- modal de edição de questão -->
+      <div id="modal-edit-question" class="modal">
+        <div class="modal-content">
+          <div class="row">
+            <span class="card-title">Editando questão</span>
+          </div>
+
+          <div class="row">
+            <label>Título</label>
+            <input id="modal-question-title" type="text">
+          </div>
+
+          <div class="row">
             <div class="row">
-              <div class="row">
-                <div class="col s12 m12 l12">
-                  <a id="btn-add-option" class="btn">Nova Opção<i class="material-icons right">add</i></a>
-                </div>
+              <div class="col s12 m12 l12">
+                <a id="btn-add-option" class="btn">Nova Opção<i class="material-icons right">add</i></a>
               </div>
-              <ol id="options"></ol>
             </div>
-
+            <ol id="options"></ol>
           </div>
-          <div class="modal-footer">
-            <!-- ID da questão editada -->
-            <input id="modal-question-id" type="hidden">
 
-            <a id="btn-save-question" class="modal-action modal-close waves-effect waves-green btn-flat">Salvar</a>
-            <a class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+        </div>
+        <div class="modal-footer">
+          <!-- ID da questão editada -->
+          <input id="modal-question-id" type="hidden">
+
+          <a id="btn-save-question" class="modal-action modal-close waves-effect waves-green btn-flat">Salvar</a>
+          <a class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+        </div>
+      </div>
+
+      <!-- modal de edição -->
+      <div id="modal1" class="modal">
+        <div class="modal-content">
+          <h4>Editar Quiz</h4>
+          <input type="text" id="modal-test-name" placeholder="Nome do Quiz">
+          <input type="text" id="modal-test-description" placeholder="Descrição do Quiz">
+        </div>
+        <div class="modal-footer">
+          <a id="btnEditAndSave" class="modal-action modal-close waves-effect waves-green btn-flat">Salvar</a>
+          <a class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+        </div>
+      </div>
+
+      <!-- modal de compartilhamento de testes -->
+      <div id="new-task-modal" class="modal">
+        <div class="modal-content">
+          <div class="row">
+            <h4>Criando nova tarefa</h4>
+          </div>
+
+          <div class="row">
+            <label>Título</label>
+            <input type="text" id="task-title">
+          </div>
+
+          <div class="row">
+            <label>Descrição</label>
+            <textarea id="task-description" class="materialize-textarea"></textarea>
+          </div>
+
+          <div class="row">
+            <label>Turma</label>
+            <select id="class"></select>
+          </div>
+
+          <div class="row">
+            <label>Prazo</label>
+            <input id="deadline" type="date">
           </div>
         </div>
-
-        <!-- modal de edição -->
-        <div id="modal1" class="modal">
-          <div class="modal-content">
-            <h4>Editar Quiz</h4>
-            <input type="text" id="modal-test-name" placeholder="Nome do Quiz">
-            <input type="text" id="modal-test-description" placeholder="Descrição do Quiz">
-          </div>
-          <div class="modal-footer">
-            <a id="btnEditAndSave" class="modal-action modal-close waves-effect waves-green btn-flat">Salvar</a>
-            <a class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
-          </div>
+        <div class="modal-footer">
+          <a id="btnShare" class="modal-action modal-close waves-effect waves-light btn-flat">Compartilhar</a>
+          <a class="modal-action modal-close waves-effect waves-light btn-flat">Cancelar</a>
         </div>
-
-        <!-- modal de compartilhamento de testes -->
-        <div id="new-task-modal" class="modal">
-          <div class="modal-content">
-            <div class="row">
-              <h4>Criando nova tarefa</h4>
-            </div>
-
-            <div class="row">
-              <label>Título</label>
-              <input type="text" id="task-title">
-            </div>
-
-            <div class="row">
-              <label>Descrição</label>
-              <textarea id="task-description" class="materialize-textarea"></textarea>
-            </div>
-
-            <div class="row">
-              <label>Turma</label>
-              <select id="class"></select>
-            </div>
-
-            <div class="row">
-              <label>Prazo</label>
-              <input id="deadline" type="date">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <a id="btnShare" class="modal-action modal-close waves-effect waves-light btn-flat">Compartilhar</a>
-            <a class="modal-action modal-close waves-effect waves-light btn-flat">Cancelar</a>
-          </div>
-        </div>
-
       </div>
     </body>
 </html>
