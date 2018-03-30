@@ -121,8 +121,10 @@ $(document).ready(function() {
   /*Criando uma nova tarefa*/
   $("#btn-create-task").click(function(event) {
     var deadline = $("#deadline").val();
+    vetor = deadline.split("-");
 
     if(isRetroativeDate(deadline) == false) {
+      console.log("ok");
       var classId = $("#class-id").val();
       var title = $("#title").val();
       var description = $("#description").val();
