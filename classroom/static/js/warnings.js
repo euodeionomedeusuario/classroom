@@ -5,7 +5,7 @@
 function fillModalEditWarning(warning_id) {
 
   $.ajax({
-    url: "http://127.0.0.1:6543/classroom/warnings/" + warning_id + "/",
+    url: "http://127.0.0.1:8000/classroom/warnings/" + warning_id + "/",
     type: "GET",
     success: function(data) {
 
@@ -20,10 +20,10 @@ function deleteWarning(warning_id) {
   var classId = $("#class-id").val();
 
   $.ajax({
-    url: "http://127.0.0.1:6543/classroom/warnings/" + warning_id + "/",
+    url: "http://127.0.0.1:8000/classroom/warnings/" + warning_id + "/",
     type: "DELETE",
     success: function(data) {
-      window.location.replace("http://127.0.0.1:6543/classroom/classes/" + classId + "/")
+      window.location.replace("http://127.0.0.1:8000/classroom/classes/" + classId + "/")
 
     }
   });
@@ -37,11 +37,11 @@ $(document).ready(function() {
     var description = $("#modal-edit-warning-description").val();
 
     $.ajax({
-      url: "http://127.0.0.1:6543/classroom/warnings/" + warningId + "/",
+      url: "http://127.0.0.1:8000/classroom/warnings/" + warningId + "/",
       type: "PUT",
       data: {"title": title, "description": description},
       success: function(data) {
-        window.location.replace("http://127.0.0.1:6543/classroom/classes/" + classId + "/")
+        window.location.replace("http://127.0.0.1:8000/classroom/classes/" + classId + "/")
       }
     });
   });

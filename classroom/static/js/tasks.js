@@ -4,7 +4,7 @@
 
 function fillModalEditTask(taskId) {
   $.ajax({
-    url: "http://127.0.0.1:6543/classroom/tasks/" + taskId + "/",
+    url: "http://127.0.0.1:8000/classroom/tasks/" + taskId + "/",
     type: "GET",
     success: function(data) {
 
@@ -27,11 +27,11 @@ $(document).ready(function() {
     var deadline = $("#modal-edit-task-deadline").val();
 
     $.ajax({
-      url: "http://127.0.0.1:6543/classroom/tasks/" + taskId + "/",
+      url: "http://127.0.0.1:8000/classroom/tasks/" + taskId + "/",
       type: "PUT",
       data: {"title": title, "description": description, "deadline": deadline},
       success: function(data) {
-        window.location.replace("http://127.0.0.1:6543/classroom/classes/" + classId + "/")
+        window.location.replace("http://127.0.0.1:8000/classroom/classes/" + classId + "/")
       }
     });
   });

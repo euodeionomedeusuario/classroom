@@ -8,11 +8,11 @@ $(document).ready(function(){
     var name = $("#modal-course-name").val();
 
     $.ajax({
-      url: "http://127.0.0.1:6543/quiz/courses/",
+      url: "http://127.0.0.1:8000/quiz/courses/",
       type: "POST",
       data: {"name": name},
       success: function(data) {
-        window.location.replace("http://127.0.0.1:6543/classroom/quiz/tests/");
+        window.location.replace("http://127.0.0.1:8000/classroom/quiz/tests/");
       }
     });
   });

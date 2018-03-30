@@ -15,10 +15,10 @@ $(document).ready(function(){
     var classId = $("#modal-class-id").val();
 
     $.ajax({
-      url: "http://127.0.0.1:6543/classroom/classes/" + classId + "/invites/",
+      url: "http://127.0.0.1:8000/classroom/classes/" + classId + "/invites/",
       type: "POST",
       success: function(event){
-        window.location.replace("http://127.0.0.1:6543/classroom/");
+        window.location.replace("http://127.0.0.1:8000/classroom/");
       }
     });
   });
@@ -28,11 +28,11 @@ $(document).ready(function(){
     var description = $("#description").val();
 
     $.ajax({
-      url: "http://127.0.0.1:6543/classroom/classes/",
+      url: "http://127.0.0.1:8000/classroom/classes/",
       type: "POST",
       data: {name: name, description: description},
       success: function(data) {
-        window.location.replace("http://127.0.0.1:6543/classroom/");
+        window.location.replace("http://127.0.0.1:8000/classroom/");
       }
     });
   });

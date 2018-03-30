@@ -17,11 +17,11 @@ $(document).ready(function(){
     });
 
     $.ajax({
-      url: "http://127.0.0.1:6543/quiz/tests/" + testId + "/",
+      url: "http://127.0.0.1:8000/quiz/tests/" + testId + "/",
       type: "PUT",
       data: {"name": name, "description": description, "questions": questions, "ntime": time, "numAttempts": numAttempts},
       success: function(data) {
-        window.location.replace("http://127.0.0.1:6543/classroom/quiz/");
+        window.location.replace("http://127.0.0.1:8000/classroom/quiz/");
 
       }
     });

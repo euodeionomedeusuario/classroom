@@ -19,7 +19,7 @@ $(document).ready(function(){
     c = c - 1;
 
     if(c == 0) {
-      window.location.replace("http://127.0.0.1:6543/classroom/");
+      window.location.replace("http://127.0.0.1:8000/classroom/");
     }
 
     t = setTimeout(function(){
@@ -41,12 +41,12 @@ $(document).ready(function(){
   function sendAnswer(test, answers, values) {
 
     $.ajax({
-      url: "http://127.0.0.1:6543/quiz/tests/" + test + "/answers/",
+      url: "http://127.0.0.1:8000/quiz/tests/" + test + "/answers/",
       type: "POST",
       data: {answers: answers, values: values},
       success: function(data) {
         console.log("Test " + test + "answered in " + Date());
-        window.location.replace("http://127.0.0.1:6543/classroom/");
+        window.location.replace("http://127.0.0.1:8000/classroom/");
       }
     });
   }

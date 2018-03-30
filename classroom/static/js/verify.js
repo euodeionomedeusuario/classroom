@@ -47,7 +47,7 @@ $(document).ready(function(){
     });
 
     $.ajax({
-      url: "http://127.0.0.1:6543/quiz/questions/" + questionId + "/",
+      url: "http://127.0.0.1:8000/quiz/questions/" + questionId + "/",
       type: "PUT",
       data: {
         "title": title,
@@ -55,7 +55,7 @@ $(document).ready(function(){
         "choices": choices
       },
       success: function(data) {
-          window.location.replace("http://127.0.0.1:6543/classroom/quiz/tests/" + testId + "/answers/");
+          window.location.replace("http://127.0.0.1:8000/classroom/quiz/tests/" + testId + "/answers/");
       }
     });
 
@@ -66,7 +66,7 @@ $(document).ready(function(){
     var questionId = $(this).siblings(".question-id").val();
 
     $.ajax({
-      url: "http://127.0.0.1:6543/quiz/questions/" + questionId + "/",
+      url: "http://127.0.0.1:8000/quiz/questions/" + questionId + "/",
       type: "GET",
       success: function(data) {
 
@@ -104,10 +104,10 @@ $(document).ready(function(){
     var testId = $("#test-id").val();
 
     $.ajax({
-      url: "http://127.0.0.1:6543/quiz/tests/" + testId + "/",
+      url: "http://127.0.0.1:8000/quiz/tests/" + testId + "/",
       type: "DELETE",
       success: function(data) {
-        window.location.replace("http://127.0.0.1:6543/classroom/quiz/");
+        window.location.replace("http://127.0.0.1:8000/classroom/quiz/");
       }
     });
   });
@@ -115,7 +115,7 @@ $(document).ready(function(){
   /*carregando turmas para compartilhar teste*/
   $("#btn-share-test").click(function(event) {
     $.ajax({
-      url: "http://127.0.0.1:6543/quiz/classes/",
+      url: "http://127.0.0.1:8000/quiz/classes/",
       type: "GET",
       success: function(data) {
         for(index in data) {
@@ -145,12 +145,12 @@ $(document).ready(function(){
     var description = $("#modal-test-description").val(); /*nova descrição*/
 
     $.ajax({
-      url: "http://127.0.0.1:6543/quiz/tests/" + test + "/",
+      url: "http://127.0.0.1:8000/quiz/tests/" + test + "/",
       type: "PUT",
       data: {name: name, description: description},
       success: function(data) {
         console.log("Test " + test + " updated in " + Date());
-        window.location.replace("http://127.0.0.1:6543/classroom/quiz/");
+        window.location.replace("http://127.0.0.1:8000/classroom/quiz/");
       }
     });
   });
@@ -165,12 +165,12 @@ $(document).ready(function(){
     var deadline = $("#deadline").val();
 
     $.ajax({
-      url: "http://127.0.0.1:6543/quiz/tests/" + test + "/classes/",
+      url: "http://127.0.0.1:8000/quiz/tests/" + test + "/classes/",
       type: "PUT",
       data: {"test": test, "classe": classe, "title": title, "description": description, "deadline": deadline},
       success: function(data) {
         console.log("Test " + test + "shared in " + Date());
-        window.location.replace("http://127.0.0.1:6543/classroom/quiz/tests/" + test + "/answers/");
+        window.location.replace("http://127.0.0.1:8000/classroom/quiz/tests/" + test + "/answers/");
 
       }
     });
