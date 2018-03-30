@@ -8,13 +8,15 @@ $(document).ready(function() {
 
   /*atualizando a nota da resposta*/
   function updateGrade(answer, grade) {
+    var testId = $("#test-id").val();
+
     $.ajax({
-      url: "http://127.0.0.1:5000/quiz/answers/" + answer + "/",
+      url: "http://127.0.0.1:6543/quiz/answers/" + answer + "/",
       type: "PUT",
       data: {grade: grade},
       success: function(data) {
         console.log("Test's grade " + test + "updated in " + Date());
-        window.location.replace("http://127.0.0.1:5000/quiz/");
+        window.location.replace("http://127.0.0.1:6543/classroom/quiz/tests/" + testId + "/answers/");
       }
     });
   }

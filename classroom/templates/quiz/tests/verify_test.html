@@ -57,13 +57,13 @@
                 <input class="question-id" type="hidden" value="{{ question._id }}">
 
                 <!-- botão para remover questão -->
-                <a class="btn red waves-effect waves-light white-text">Remover
-                  <i class="material-icons right">remove</i>
+                <a class="btn red waves-effect waves-light white-text">
+                  <i class="material-icons">remove</i>
                 </a>
 
                 <!-- botão para editar questão -->
-                <a href="#modal-edit-question" class="btn-call-modal-edit-question modal-trigger btn blue waves-effect waves-light white-text">Editar
-                  <i class="material-icons right">edit</i>
+                <a href="#modal-edit-question" class="btn-call-modal-edit-question modal-trigger btn blue waves-effect waves-light white-text">
+                  <i class="material-icons">edit</i>
                 </a>
               </div>
             </div>
@@ -102,11 +102,11 @@
          </a>
          <ul>
            <li>
-             <a id="call" class="modal-trigger" href="#modal1">Editar Teste</a>
+             <a href="/classroom/quiz/tests/{{ test._id }}/">Editar Teste</a>
            </li>
 
            <li>
-             <a id="btn-remove-test">Apagar Teste</a>
+             <a href="#" id="btn-remove-test">Apagar Teste</a>
            </li>
 
            <li>

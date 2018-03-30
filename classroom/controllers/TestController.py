@@ -10,6 +10,18 @@ from classroom import app
 from classroom import db
 
 
+@app.route("/classroom/quiz/tests/<test_id>/", methods=["GET"])
+def get_test_to_add_questions(test_id):
+    test = db.tests.find_one({"_id": ObjectId(test_id)})
+
+    questions = []
+    for id in test["questions"]:
+        question = db.questions.find_one({"_id": ObjectId(id)})
+        questions.append(question)
+
+    return render_template("quiz/tests/add_questions_to_test.html", test=test, questions=questions)
+
+
 #Redirecionando para dashboard
 @app.route("/classroom/quiz/tests/", methods=["GET"])
 def dashboard():
@@ -17,7 +29,7 @@ def dashboard():
 
 
 #removendo um teste
-@app.route("/classroom/tests/<test_id>/", methods=["DELETE"])
+@app.route("/quiz/tests/<test_id>/", methods=["DELETE"])
 def remove_test(test_id):
     db.tests.remove( {"_id": ObjectId(test_id)} )
     #removendo respostas relacionadas ao teste
@@ -65,8 +77,6 @@ def create_test(course, topic):
                 questions.append(item)
 
         i = i + 1
-
-    print(questions)
 
     return jsonify(questions)
 
@@ -129,20 +139,21 @@ def share_test(test_id):
 def update_test(test_id):
     name = request.form.get("name")
     description = request.form.get("description")
+    num_attempts = request.form.get("numAttempts")
+    time = request.form.get("ntime")
 
-    test = db.tests.find_one(
-           {
-                "_id" : ObjectId(test_id)
-           })
+    questions = request.form.getlist("questions[]")
 
-    test["name"] = name
-    test["description"] = description
-
-    db.tests.update(
-    {
-        "_id" : ObjectId(test_id)},
-        test
-    )
+    db.tests.update({"_id": ObjectId(test_id)},
+    {"$set": {
+        "name": name,
+        "description": description,
+        "classes": [],
+        "questions": questions,
+        "numAttempts": num_attempts,
+        "time": time
+            }
+    })
 
     return "OK"
 

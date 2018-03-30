@@ -15,6 +15,7 @@
         <script src="{{ url_for('static', filename='js/create.js') }}"></script>
         <script src="{{ url_for('static', filename='js/courses.js') }}"></script>
         <script src="{{ url_for('static', filename='js/topics.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/edit-test.js') }}"></script>
 
         <link rel = "stylesheet" href = "{{ url_for('static', filename='css/create.css') }}">
 
@@ -104,24 +105,39 @@
             <div class="card">
                 <div class="card-action">
                   <a class="btn waves-effect waves-light blue white-text" id="btnGeneratePDF">Baixar<i class="material-icons right">get_app</i></a>
-                  <a class="btn waves-effect waves-light blue white-text" id="btnSave">Salvar<i class="material-icons right">save</i></a>
+                  <a class="btn waves-effect waves-light blue white-text" id="btn-update-test">Atualizar<i class="material-icons right">save</i></a>
 
                 </div>
 
                 <div class="card-content">
+                  <input id="test-id" type="hidden" value="{{ test._id }}">
+
                   <label>Nome</label>
-                  <input type="text" id="name">
+                  <input type="text" id="name" value="{{ test.name }}">
 
                   <label>Descrição</label>
-                  <input type="text" id="description">
+                  <input type="text" id="description" value="{{ test.description }}">
 
                   <label>Número de Tentativas</label>
-                  <input type="number" id="num-attempts" min="1" value="1">
+                  <input type="number" id="num-attempts" min="1" value="{{ test.numAttempts }}">
 
                   <label>Tempo (em minutos)</label>
-                  <input type="number" id="time" min="1" value="1">
+                  <input type="number" id="time" min="1" value="{{ test.time }}">
 
-                  <ol class="card-title" id="questions-list"></ol>
+                  <ol class="card-title" id="questions-list">
+                    {% for question in questions %}
+                    <li>
+                      <input type="hidden" id="question-id" value="{{ question._id }}">
+                      <p>{{ question.title }}</p>
+
+                      {% if question.type == "multipleChoice" %}
+                        {% for choice in question.choices %}
+                          <p>{{choice}}</p>
+                        {% endfor %}
+                      {% endif %}
+                    </li>
+                    {% endfor %}
+                  </ol>
                 </div>
 
             </div>
