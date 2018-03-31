@@ -2,6 +2,9 @@
 
 /**/
 
+var PROTOCOL = window.location.protocol + "//";
+var HOSTNAME = window.location.hostname;
+
 $(document).ready(function() {
   /*Inicializando o botão collapse*/
   $(".button-collapse").sideNav();
@@ -11,12 +14,12 @@ $(document).ready(function() {
     var testId = $("#test-id").val();
 
     $.ajax({
-      url: "http://127.0.0.1:8000/quiz/answers/" + answer + "/",
+      url: PROTOCOL + HOSTNAME + "/quiz/answers/" + answer + "/",
       type: "PUT",
       data: {grade: grade},
       success: function(data) {
         console.log("Test's grade " + test + "updated in " + Date());
-        window.location.replace("http://127.0.0.1:8000/classroom/quiz/tests/" + testId + "/answers/");
+        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/quiz/tests/" + testId + "/answers/");
       }
     });
   }

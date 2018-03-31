@@ -2,6 +2,9 @@
 
 /**/
 
+var PROTOCOL = window.location.protocol + "//";
+var HOSTNAME = window.location.hostname;
+
 $(document).ready(function(){
   $("#btn-update-test").click(function(event){
     var testId = $("#test-id").val();
@@ -17,11 +20,11 @@ $(document).ready(function(){
     });
 
     $.ajax({
-      url: "http://127.0.0.1:8000/quiz/tests/" + testId + "/",
+      url: PROTOCOL + HOSTNAME + "/quiz/tests/" + testId + "/",
       type: "PUT",
       data: {"name": name, "description": description, "questions": questions, "ntime": time, "numAttempts": numAttempts},
       success: function(data) {
-        window.location.replace("http://127.0.0.1:8000/classroom/quiz/");
+        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/quiz/");
 
       }
     });

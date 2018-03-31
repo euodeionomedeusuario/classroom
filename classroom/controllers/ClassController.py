@@ -1,6 +1,6 @@
 import datetime
 
-from flask import request, session, render_template
+from flask import request, session, render_template, jsonify
 from bson.objectid import ObjectId
 
 from classroom import app
@@ -72,7 +72,7 @@ def get_index_student(class_id, user_id):
 def create_class():
     name = request.form.get("name")
     description = request.form.get("description")
-    creator = db.users.find_one( {"email": session["email"]} )
+    creator = db.users.find_one( {"_id": ObjectId(session["_id"])} )
     participants = []
 
     db.classes.insert( {
@@ -83,6 +83,16 @@ def create_class():
     } )
 
     return "OK"
+
+#redirecionando para painel de gerenciamento de turmas
+@app.route("/classes/<class_id>/", methods=["GET"])
+def get_class_by_id(class_id):
+    result = db.classes.find_one( {"_id": ObjectId(class_id)} )
+
+    c = {"name": result["name"], "description": result["description"]}
+
+    return jsonify(c)
+
 
 #redirecionando para painel de gerenciamento de turmas
 @app.route("/classroom/classes/<class_id>/", methods=["GET"])

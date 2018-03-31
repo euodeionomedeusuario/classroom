@@ -2,17 +2,20 @@
 
 /*funções referentes a criação de disciplinas*/
 
+var PROTOCOL = window.location.protocol + "//";
+var HOSTNAME = window.location.hostname;
+
 $(document).ready(function(){
   /*criando uma nova disciplina*/
   $("#btn-create-course").click(function(event){
     var name = $("#modal-course-name").val();
 
     $.ajax({
-      url: "http://127.0.0.1:8000/quiz/courses/",
+      url: PROTOCOL + HOSTNAME + "/quiz/courses/",
       type: "POST",
       data: {"name": name},
       success: function(data) {
-        window.location.replace("http://127.0.0.1:8000/classroom/quiz/tests/");
+        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/quiz/tests/");
       }
     });
   });

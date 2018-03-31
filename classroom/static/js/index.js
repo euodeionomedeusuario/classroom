@@ -2,6 +2,9 @@
 
 /**/
 
+var PROTOCOL = window.location.protocol + "//";
+var HOSTNAME = window.location.hostname;
+
 $(document).ready(function(){
   /*Inicialzando collapse button*/
   $(".button-collapse").sideNav();
@@ -15,24 +18,26 @@ $(document).ready(function(){
     var classId = $("#modal-class-id").val();
 
     $.ajax({
-      url: "http://127.0.0.1:8000/classroom/classes/" + classId + "/invites/",
+      url: PROTOCOL + HOSTNAME + "/classroom/classes/" + classId + "/invites/",
       type: "POST",
       success: function(event){
-        window.location.replace("http://127.0.0.1:8000/classroom/");
+        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/");
       }
     });
   });
 
   $("#btn-create-class").click(function(event) {
+    console.log(PROTOCOL + HOSTNAME);
+
     var name = $("#name").val();
     var description = $("#description").val();
 
     $.ajax({
-      url: "http://127.0.0.1:8000/classroom/classes/",
+      url: PROTOCOL + HOSTNAME + "/classroom/classes/",
       type: "POST",
       data: {name: name, description: description},
       success: function(data) {
-        window.location.replace("http://127.0.0.1:8000/classroom/");
+        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/");
       }
     });
   });

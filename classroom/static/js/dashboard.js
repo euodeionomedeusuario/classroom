@@ -2,6 +2,9 @@
 
 /**/
 
+var PROTOCOL = window.location.protocol + "//";
+var HOSTNAME = window.location.hostname;
+
 $(document).ready(function(){
   /*Habilitando o uso de efeitos do Materialize nos selects*/
   $('select').material_select();
@@ -124,7 +127,7 @@ $(document).ready(function(){
   /*Carregando disciplinas disponíveis no BD*/
   function loadCourses() {
     $.ajax({
-      url: "http://127.0.0.1:8000/quiz/courses/",
+      url: PROTOCOL + HOSTNAME + "/quiz/courses/",
       type: "GET",
       success: function(data) {
         for(index in data) {
@@ -141,7 +144,7 @@ $(document).ready(function(){
   /*Carregando os tópicos no BD*/
   function loadTopics(course) {
     $.ajax({
-      url: "http://127.0.0.1:8000/quiz/courses/" + course + "/topics/",
+      url: PROTOCOL + HOSTNAME + "/quiz/courses/" + course + "/topics/",
       type: "GET",
       success: function(data) {
         for(index in data) {
@@ -179,7 +182,7 @@ $(document).ready(function(){
   /*Carregando questões consultadas no BD*/
   function loadQuestions(course, topic, number, level, type) {
     $.ajax({
-      url: "http://127.0.0.1:8000/quiz/test/" + course + "/" + topic + "/",
+      url: PROTOCOL + HOSTNAME + "/quiz/test/" + course + "/" + topic + "/",
       type: "POST",
       /*Melhore esta parte*/
       data: { number: number, easy: level[0], medium: level[1], hard: level[2], type: type},
@@ -209,12 +212,12 @@ $(document).ready(function(){
   /*Salvando teste*/
   function saveTest(name, description, questions, numAttempts, time) {
       $.ajax({
-        url: "http://127.0.0.1:8000/quiz/tests/",
+        url: PROTOCOL + HOSTNAME + "/quiz/tests/",
         type: "POST",
         data: {"name": name, "description": description, "questions": questions, "ntime": time, "numAttempts": numAttempts},
         success: function(data) {
           console.log("New test saved in " + Date());
-          window.location.replace("http://127.0.0.1:8000/classroom/quiz/");
+          window.location.replace(PROTOCOL + HOSTNAME + "/classroom/quiz/");
 
         }
       });
