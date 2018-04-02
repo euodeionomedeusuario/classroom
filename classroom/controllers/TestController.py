@@ -212,8 +212,6 @@ def send_answer(test_id):
     if last_answer:
         num_attempts = int(last_answer["numAttempts"]) + 1
 
-        #apagando resposta anterior
-        db.answers.remove({"_id": last_answer["_id"]})
     else:
         num_attempts = 1
 
@@ -253,7 +251,10 @@ def send_answer(test_id):
     if last_answer:
         if last_answer["grade"] > grade:
             return "OK"
-
+        else:
+            #apagando resposta anterior
+            db.answers.remove({"_id": last_answer["_id"]})
+            
     #salvando resposta no BD
     db.answers.insert({
         "user": user,
