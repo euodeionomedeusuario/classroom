@@ -28,35 +28,39 @@
 
     <div class="container">
       <div class="row">
-        <div class="row">
-          <h5>Entrar</h5>
+        <div class="col s12 m12 l12">
+          <div class="row">
+            <h5>Entrar</h5>
+          </div>
+          <div class="row">
+            <form action="/classroom/login/" method="POST">
+              {% if error %}
+                <div class="row">
+                  <span class="error">{{ error }}<span>
+                </div>
+              {% endif %}
+
+              <div class="row">
+                <label>Email</label>
+                <input type="email" name="email">
+              </div>
+
+              <div class="row">
+                <label>Senha</label>
+                <input type="password" name="password">
+              </div>
+
+              <div class="row">
+                <div class="col s12 m6 l6">
+                  <button type="submit" class="btn col s12 waves-effect waves-light red">Entrar</button>
+                </div>
+                <div class="col s12 m6 l6">
+                  <a href="/classroom/signup/" class="btn col s12 waves-effect waves-light red">Cadastrar-se</a>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
-        <form action="/classroom/login/" method="POST">
-          {% if error %}
-            <div class="row">
-              <span class="error">{{ error }}<span>
-            </div>
-          {% endif %}
-
-          <div class="row">
-            <label>Email</label>
-            <input type="email" name="email">
-          </div>
-
-          <div class="row">
-            <label>Senha</label>
-            <input type="password" name="password">
-          </div>
-
-          <div class="row">
-            <div class="col s12 m6 l6">
-              <button type="submit" class="btn col s12 waves-effect waves-light red">Entrar</button>
-            </div>
-            <div class="col s12 m6 l6">
-              <a href="/classroom/signup/" class="btn col s12 waves-effect waves-light red">Cadastrar-se</a>
-            </div>
-          </div>
-        </form>
       </div>
     </div>
   </body>
