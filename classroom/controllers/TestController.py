@@ -250,6 +250,10 @@ def send_answer(test_id):
 
     grade = num_correct_questions / num_questions * 10
 
+    if last_answer:
+        if last_answer["grade"] > grade:
+            return "OK"
+
     #salvando resposta no BD
     db.answers.insert({
         "user": user,
