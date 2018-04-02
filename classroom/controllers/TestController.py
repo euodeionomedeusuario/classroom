@@ -160,7 +160,7 @@ def update_test(test_id):
 
 
 #Retornando um teste pelo ID
-@app.route("/classroom/quiz/tests/<test_id>/answers/", methods=["GET"])
+@app.route("/quiz/tests/<test_id>/answers/", methods=["GET"])
 def test(test_id):
     test = db.tests.find_one(
            {
@@ -211,6 +211,7 @@ def send_answer(test_id):
 
     if last_answer:
         num_attempts = int(last_answer["numAttempts"]) + 1
+        db.answers.update({"_id": last_answer["_id"]}, {"$inc": {"numAttempts": 1}})
 
     else:
         num_attempts = 1
@@ -254,7 +255,7 @@ def send_answer(test_id):
         else:
             #apagando resposta anterior
             db.answers.remove({"_id": last_answer["_id"]})
-            
+
     #salvando resposta no BD
     db.answers.insert({
         "user": user,
