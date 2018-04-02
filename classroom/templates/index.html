@@ -2,7 +2,9 @@
 
 <html lang="pt-br">
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Classroom</title>
 
         <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -30,43 +32,45 @@
 
       <!-- lista de turmas -->
       <div class="container">
-        {% if classes %}
-          {% for class in classes %}
-            <div class="card">
-              <div class="card-content">
-                <span class="card-title"><a href="/classroom/classes/{{ class._id }}/">{{ class.name }}</a></span>
-                <p>{{ class.description }}</p>
+        <div class="row">
+          {% if classes %}
+            {% for class in classes %}
+              <div class="card">
+                <div class="card-content">
+                  <span class="card-title"><a href="/classroom/classes/{{ class._id }}/">{{ class.name }}</a></span>
+                  <p>{{ class.description }}</p>
+                </div>
               </div>
-            </div>
-          {% endfor %}
-        {% endif %}
+            {% endfor %}
+          {% endif %}
 
-        <!-- lista de turmas -->
-        {% if classes %}
-          {% for class in my_classes %}
-            <div class="card">
-              <div class="card-content">
-                <span class="card-title"><a href="/classroom/user/{{ user }}/classes/{{ class._id }}/">{{ class.name }}</a></span>
-                <p>{{ class.description }}</p>
+          <!-- lista de turmas -->
+          {% if classes %}
+            {% for class in my_classes %}
+              <div class="card">
+                <div class="card-content">
+                  <span class="card-title"><a href="/classroom/user/{{ user }}/classes/{{ class._id }}/">{{ class.name }}</a></span>
+                  <p>{{ class.description }}</p>
+                </div>
               </div>
-            </div>
-          {% endfor %}
-        {% endif %}
+            {% endfor %}
+          {% endif %}
 
-        <div class="fixed-action-btn vertical click-to-toggle">
-         <a class="btn-floating btn-large red">
-           <i class="material-icons">menu</i>
-         </a>
-         <ul>
-           <li>
-             <a href="#new-class-modal" class="modal-trigger">Nova Turma</a>
-           </li>
+          <div class="fixed-action-btn vertical click-to-toggle">
+           <a class="btn-floating btn-large red">
+             <i class="material-icons">menu</i>
+           </a>
+           <ul>
+             <li>
+               <a href="#new-class-modal" class="modal-trigger">Nova Turma</a>
+             </li>
 
-           <li>
-             <a href="/classroom/quiz/tests/" class="modal-trigger">Novo Teste</a>
-           </li>
-         </ul>
-       </div>
+             <li>
+               <a href="/classroom/quiz/tests/" class="modal-trigger">Novo Teste</a>
+             </li>
+           </ul>
+         </div>
+        </div>
 
       </div>
 
