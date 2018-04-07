@@ -211,16 +211,21 @@ $(document).ready(function(){
 
   /*Salvando teste*/
   function saveTest(name, description, questions, numAttempts, time) {
-      $.ajax({
-        url: PROTOCOL + HOSTNAME + "/quiz/tests/",
-        type: "POST",
-        data: {"name": name, "description": description, "questions": questions, "ntime": time, "numAttempts": numAttempts},
-        success: function(data) {
-          console.log("New test saved in " + Date());
-          window.location.replace(PROTOCOL + HOSTNAME + "/classroom/quiz/");
+      console.log("Ok");
+      if(name) {
+        $.ajax({
+          url: PROTOCOL + HOSTNAME + "/quiz/tests/",
+          type: "POST",
+          data: {"name": name, "description": description, "questions": questions, "ntime": time, "numAttempts": numAttempts},
+          success: function(data) {
+            console.log("New test saved in " + Date());
+            window.location.replace(PROTOCOL + HOSTNAME + "/classroom/quiz/");
 
-        }
-      });
+          }
+        });
+      } else {
+        $("#error").css("display", "block").css("color", "red").text("Vocẽ deve escolher um nome para o teste!");
+      }
   }
 
   /*Adicionando evento para o botão de salvar teste*/

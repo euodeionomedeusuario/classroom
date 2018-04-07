@@ -160,7 +160,7 @@ def update_test(test_id):
 
 
 #Retornando um teste pelo ID
-@app.route("/quiz/tests/<test_id>/answers/", methods=["GET"])
+@app.route("/classroom/quiz/tests/<test_id>/answers/", methods=["GET"])
 def test(test_id):
     test = db.tests.find_one(
            {
