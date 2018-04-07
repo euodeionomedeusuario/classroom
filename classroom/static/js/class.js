@@ -124,24 +124,26 @@ $(document).ready(function() {
   /*Criando uma nova tarefa*/
   $("#btn-create-task").click(function(event) {
     var deadline = $("#deadline").val();
-    vetor = deadline.split("-");
+    var test = $("#test :checked").val();
 
     if(isRetroativeDate(deadline) == false) {
-      console.log("ok");
-      var classId = $("#class-id").val();
-      var title = $("#title").val();
-      var description = $("#description").val();
-      var deadline = $("#deadline").val();
-      var test = $("#test :checked").val();
+      if(test) {
+        var classId = $("#class-id").val();
+        var title = $("#title").val();
+        var description = $("#description").val();
+        var deadline = $("#deadline").val();
 
-      $.ajax({
-        url: PROTOCOL + HOSTNAME + "/classroom/tasks/",
-        type: "POST",
-        data: {title: title, description: description, deadline: deadline, classId: classId, test: test},
-        success: function(data) {
-          window.location.replace(PROTOCOL + HOSTNAME + "/classroom/classes/" + classId);
-        }
-      });
+        $.ajax({
+          url: PROTOCOL + HOSTNAME + "/classroom/tasks/",
+          type: "POST",
+          data: {title: title, description: description, deadline: deadline, classId: classId, test: test},
+          success: function(data) {
+            window.location.replace(PROTOCOL + HOSTNAME + "/classroom/classes/" + classId);
+          }
+        });
+      } else {
+        $("#modal-new-task-error").css("display", "block").css("color", "red").text("Vocẽ deve escolher um teste!");
+      }
     } else {
       $("#modal-new-task-error").css("display", "block").css("color", "red").text("Escolha um prazo válido!");
     }
