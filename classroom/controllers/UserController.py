@@ -7,6 +7,27 @@ from classroom import app
 from classroom import db
 
 
+#atualizando informações sobre o usuário
+@app.route("/classroom/users/<user_id>/", methods=["PUT"])
+def update_user(user_id):
+    try:
+        name = request.form.get("name")
+        email = request.form.get("email")
+
+        db.users.update({"_id": ObjectId(user_id)}, {"$set": {"name": name, "email": email}})
+
+        return "OK", 200
+    except Exception as e:
+        return "Invalid Request", 400
+
+#redirecionando para página de edição de usuário
+@app.route("/classroom/users/", methods=["GET"])
+def redirect_user():
+    user = db.users.find_one({"_id": ObjectId(session["_id"])});
+
+    return render_template("users/edit-user.html", user=user), 200
+
+
 #Redirecionando usuário para a página de login
 @app.route("/classroom/login/", methods=["GET"])
 def redirect_login():
