@@ -25,7 +25,10 @@ def get_test_to_add_questions(test_id):
 #Redirecionando para dashboard
 @app.route("/classroom/quiz/tests/", methods=["GET"])
 def dashboard():
-    return render_template("quiz/tests/create_test.html")
+        if "_id" in session:
+            return render_template("quiz/tests/create_test.html")
+        else:
+            return render_template("errors/403.html")
 
 
 #removendo um teste
