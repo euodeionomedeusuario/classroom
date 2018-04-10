@@ -42,7 +42,7 @@ def remove_test(test_id):
 
 
 #Retornando todas as questões por tópico
-@app.route("/quiz/test/<course>/<topic>/", methods=["POST"])
+@app.route("/quiz/tests/<course>/<topic>/", methods=["POST"])
 def create_test(course, topic):
     number = int(request.form.get("number")) #Número de questões
     type = request.form.get("type"); #Tipo de questão
@@ -70,7 +70,7 @@ def create_test(course, topic):
                 "topic._id" : ObjectId(topic),
                 "level" : level[i]["name"],
                 "type": type,
-                "private": false
+                "private": "false"
             }).limit(amount).skip(num_random)
 
             for item in result:

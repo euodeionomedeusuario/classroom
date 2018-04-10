@@ -14,6 +14,14 @@ $(document).ready(function(){
   // Initialize collapsible (uncomment the line below if you use the dropdown variation)
   $('.collapsible').collapsible();
 
+  $(".btn-remove-question-of-test").click(function(event){
+    $(this).parent().remove();
+  });
+
+  $(".btn-remove-question-of-test2").click(function(event){
+    console.log("eduardo");
+  });
+
   function createTest(test) {
     $test = $("<tr />")
               .append($("<td />")
@@ -182,7 +190,7 @@ $(document).ready(function(){
   /*Carregando questões consultadas no BD*/
   function loadQuestions(course, topic, number, level, type) {
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/quiz/test/" + course + "/" + topic + "/",
+      url: PROTOCOL + HOSTNAME + "/quiz/tests/" + course + "/" + topic + "/",
       type: "POST",
       /*Melhore esta parte*/
       data: { number: number, easy: level[0], medium: level[1], hard: level[2], type: type},
