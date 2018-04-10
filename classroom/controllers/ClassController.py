@@ -97,16 +97,20 @@ def get_class_by_id(class_id):
 #redirecionando para painel de gerenciamento de turmas
 @app.route("/classroom/classes/<class_id>/", methods=["GET"])
 def get_class(class_id):
-    c = db.classes.find_one( {"_id": ObjectId(class_id)} )
+    try:
+        c = db.classes.find_one( {"_id": ObjectId(class_id)} )
 
-    tasks = db.tasks.find({"class._id": c["_id"]}).sort([("deadline", -1)])
+        if(session["_id"] == str(c["creator"]["_id"])):
+            tasks = db.tasks.find({"class._id": c["_id"]}).sort([("deadline", -1)])
 
-    invites = db.invites.find({"class._id": c["_id"]})
+            invites = db.invites.find({"class._id": c["_id"]})
 
-    warnings = db.warnings.find({"class._id": c["_id"]})
+            warnings = db.warnings.find({"class._id": c["_id"]})
 
-    return render_template("classes/index.html", c=c, tasks=tasks, invites=invites, warnings=warnings)
+            return render_template("classes/index.html", c=c, tasks=tasks, invites=invites, warnings=warnings)
 
+    except Exception as e:
+        return render_template("errors/403.html")
 
 #removendo turma
 @app.route("/classroom/classes/<class_id>/", methods=["DELETE"])
