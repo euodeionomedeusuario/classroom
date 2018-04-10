@@ -42,6 +42,7 @@ $(document).ready(function(){
     var title = $("#modal-question-title").val();
     var correctAnswer = $(".option:first").val();
     var choices = [];
+    var p = $("#nq-private").prop("checked")
 
     /*pegando as opções da questão*/
     $(".option").each(function(index, element) {
@@ -54,7 +55,8 @@ $(document).ready(function(){
       data: {
         "title": title,
         "correctAnswer": correctAnswer,
-        "choices": choices
+        "choices": choices,
+        "private": p
       },
       success: function(data) {
           window.location.replace(PROTOCOL + HOSTNAME + "/classroom/quiz/tests/" + testId + "/answers/");

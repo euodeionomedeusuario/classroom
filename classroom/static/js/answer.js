@@ -58,6 +58,7 @@ $(document).ready(function(){
     var test = $("#test-id").val(); /*ID do quiz*/
     var values = []; /*lista dos valores do ID de cada resposta*/
     var answers = [];
+
     /*pegando respostas curtas*/
     $(".question").each(function(index, element){
       var resposta = $(this).children(".answer").val();

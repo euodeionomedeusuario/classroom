@@ -111,7 +111,6 @@ $(document).ready(function() {
 
   /*Criando uma nova questão*/
   function createQuestion(question) {
-    console.log(question);
     /*Criando questões de resposta curta ou verdadeiro ou falso*/
     if(question["type"] == "shortAnswer" || question["type"] == "trueOrFalse") {
       $question = $("<li />")
@@ -171,10 +170,12 @@ $(document).ready(function() {
     var level = $("#nq-level :checked").val();
     var correctAnswer = $(".option:first").val();
     var answers = [];
+    var p = $("#nq-private").prop("checked")
 
     /*pegando as opções da questão*/
     $(".option").each(function(index, element) {
       answers.push($(this).val());
+
     });
 
     console.log(correctAnswer);
@@ -182,7 +183,7 @@ $(document).ready(function() {
     $.ajax({
       url: PROTOCOL + HOSTNAME + "/quiz/questions/",
       type: "POST",
-      data: {title: title, type: type, level: level, topic: topic, correctAnswer: correctAnswer, answers: answers},
+      data: {private: p, title: title, type: type, level: level, topic: topic, correctAnswer: correctAnswer, answers: answers},
       success: function(data) {
           $("#questions-list").append(createQuestion(data))
       }

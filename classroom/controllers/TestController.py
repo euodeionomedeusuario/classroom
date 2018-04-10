@@ -69,7 +69,8 @@ def create_test(course, topic):
             result = db.questions.find({
                 "topic._id" : ObjectId(topic),
                 "level" : level[i]["name"],
-                "type": type
+                "type": type,
+                "private": false
             }).limit(amount).skip(num_random)
 
             for item in result:
@@ -171,7 +172,7 @@ def test(test_id):
                     "_id" : ObjectId(test_id)
                })
 
-        if test["creator"]["_id"] == session["_id"]:
+        if str(test["creator"]["_id"]) == session["_id"]:
             test["_id"] = str(test["_id"])
             test["creator"]["_id"] = str(test["creator"]["_id"])
 
