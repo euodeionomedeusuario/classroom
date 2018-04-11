@@ -1,10 +1,13 @@
 import datetime
 
-from flask import request, session, render_template, jsonify
+from flask import request, session, render_template, jsonify, redirect
 from bson.objectid import ObjectId
 
 from classroom import app
 from classroom import db
+
+from flask_mail import Message
+from classroom import mail
 
 
 #aceitando pedido para entrar em turma
@@ -42,7 +45,8 @@ def send_invite(class_id):
 
         db.invites.insert({
             "user": user,
-            "class": classe
+            "class": classe,
+            "type": "normal"
         })
     except:
         return "Error"
@@ -103,7 +107,7 @@ def get_class(class_id):
         if(session["_id"] == str(c["creator"]["_id"])):
             tasks = db.tasks.find({"class._id": c["_id"]}).sort([("deadline", -1)])
 
-            invites = db.invites.find({"class._id": c["_id"]})
+            invites = db.invites.find({"class._id": c["_id"], "type": "normal"})
 
             warnings = db.warnings.find({"class._id": c["_id"]})
 
@@ -132,10 +136,37 @@ def update_class(class_id):
 
 @app.route("/classroom/classes/<class_id>/participants/", methods=["PUT"])
 def add_participant(class_id):
-    email = request.form.get("email")
+    try:
+        email = request.form.get("email")
+        classe = db.classes.find_one({"_id": ObjectId(class_id)})
+        user = db.users.find_one({"email": email})
+        invite_id = db.invites.insert_one({"user": user, "class": classe}).inserted_id
 
-    user = db.users.find_one({"email": email})
+        msg = Message(
+                  'Convite Classroom',
+                   sender='lawsclassroom@gmail.com',
+                   recipients=
+                   [email])
+        msg.html = "Você foi convidado para participar de {0} no Classroom!<br><a href='http://192.168.0.115/classroom/invites/{1}/entry/'>Aceitar</a>".format(classe["name"], invite_id)
+        mail.send(msg)
+        return "Sent"
+    except Exception as e:
+        return "error", 400
 
-    db.classes.update({"_id": ObjectId(class_id)}, {"$addToSet": {"participants": user["_id"]}})
 
-    return "OK"
+@app.route("/classroom/invites/<invite_id>/entry/")
+def entry_at_class(invite_id):
+    try:
+        if '_id' in session:
+            user = db.users.find_one({"_id": ObjectId(session["_id"])})
+            invite = db.invites.find_one({"_id": ObjectId(invite_id)})
+
+            if str(user["_id"]) == str(invite["user"]["_id"]):
+                db.classes.update({"_id": ObjectId(invite["class"]["_id"])}, {"$addToSet": {"participants": user["_id"]}})
+
+                db.invites.remove({"_id": ObjectId(invite_id)})
+                return redirect("/classroom/")
+            else:
+                return render_template("errors/403.html")
+    except Exception as e:
+        return render_template("errors/403.html")

@@ -1,10 +1,25 @@
+import os
+
 from flask import Flask
 from pymongo import MongoClient
+from flask_mail import Mail
 
 #Instaciando objeto Flask
 app = Flask(__name__)
-#Instaciando objeto MongoClient
 
+app.config.update(
+        DEBUG=True,
+        #EMAIL SETTINGS
+        MAIL_SERVER='smtp.gmail.com',
+        MAIL_PORT=465,
+        MAIL_USE_SSL=True,
+        MAIL_USERNAME = 'lawsclassroom@gmail.com',
+        MAIL_PASSWORD = '@lawsclassroom'
+        )
+
+mail=Mail(app)
+
+#Instaciando objeto MongoClient
 client = MongoClient('mongodb://localhost:27017/')
 #Criando instância do BD 'quizdb'
 db = client.quizdb
