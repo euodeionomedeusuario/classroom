@@ -5,7 +5,6 @@
 var PROTOCOL = window.location.protocol + "//";
 var HOSTNAME = window.location.hostname;
 
-
 function acceptInvite(invite) {
   var classId = $("#class-id").val();
 

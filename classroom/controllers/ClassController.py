@@ -134,6 +134,16 @@ def update_class(class_id):
 
     return "OK"
 
+
+#deixando de participar de uma turma
+@app.route("/classroom/classes/<class_id>/participants/", methods=["DELETE"])
+def left_class(class_id):
+    if '_id' in session:
+        db.classes.update({"_id": ObjectId(class_id)}, {"$pull": {"participants": ObjectId(session["_id"])}})
+
+        return "OK"
+
+#enviando convite por email para usúario
 @app.route("/classroom/classes/<class_id>/participants/", methods=["PUT"])
 def add_participant(class_id):
     try:

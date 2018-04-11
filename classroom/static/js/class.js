@@ -15,6 +15,18 @@ $(document).ready(function() {
   /*Habilitando modal*/
   $(".modal-trigger").leanModal();
 
+  $("#btn-left-class").click(function(event){
+    var classId = $("#class-id").val();
+
+    $.ajax({
+      url: PROTOCOL + HOSTNAME + "/classroom/classes/" + classId + "/participants/",
+      type: "DELETE",
+      success: function(event){
+        window.location.replace(PROTOCOL + HOSTNAME + "/classroom");
+      }
+    });
+  });
+
   $("#btn-create-warning").click(function(event){
     var classId = $("#class-id").val();
     var title = $("#modal-warning-title").val();
