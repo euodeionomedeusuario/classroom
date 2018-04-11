@@ -77,7 +77,7 @@ $(document).ready(function(){
         $("#modal-question-id").val(data["_id"]);
         $("#modal-question-title").val(data["title"]);
 
-        if(data["type"] == "multipleChoice") {
+        if(data["type"] == "multipleChoice" || data["type"] == "trueOrFalse") {
           $("#options").empty();
 
           $(data["choices"]).each(function(index, element) {
@@ -98,6 +98,25 @@ $(document).ready(function(){
 
             $("#options").append($choice);
           });
+        } else {
+          $("#options").empty();
+
+          var $choice = $("<li />")
+                          .append($("<input />")
+                              .addClass("option")
+                              .attr("value", data["correctAnswer"])
+                              .attr("type", "text"))
+                          .append($("<a />")
+                              .addClass("btn btn-remove-option")
+                              .text("Remover")
+                              .click(function(event) {
+                                $(this).parent().remove();
+                              })
+                                .append($("<i />")
+                                  .addClass("material-icons right")
+                                  .text("remove")));
+
+          $("#options").append($choice);
         }
       }
     });
