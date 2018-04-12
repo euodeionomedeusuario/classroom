@@ -59,16 +59,21 @@ def get_index_student(class_id, user_id):
     date = datetime.datetime.now().strftime("%Y-%m-%d")
 
     classe = db.classes.find_one({"_id": ObjectId(class_id)})
+
+    users = []
+
+    for user_id in classe["participants"]:
+        u = db.users.find_one(user_id)
+        users.append(u)
+
     tasks = db.tasks.find({
         "class._id": classe["_id"],
         "deadline" : { "$gte" : date }
     }).sort([("deadline", -1)])
 
-    user = db.users.find_one({"_id": ObjectId(session["_id"])})
-
     warnings = db.warnings.find({"class._id": classe["_id"]})
 
-    return render_template("classes/student.html", c=classe, tasks=tasks, user=user, warnings=warnings)
+    return render_template("classes/student.html", c=classe, tasks=tasks, warnings=warnings, users=users)
 
 
 #Criando uma nova turma

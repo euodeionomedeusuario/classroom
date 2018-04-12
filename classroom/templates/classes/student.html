@@ -7,9 +7,17 @@
     <title>Classroom</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css"> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script> -->
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+
 
     <script src="{{ url_for('static', filename='js/class.js') }}"></script>
 
@@ -36,56 +44,63 @@
         </div>
       </div>
 
-      {% if warnings %}
-        <div class="card">
-          <div class="card-content">
-            <span class="card-title">Avisos</span>
-              {% for warning in warnings %}
-                <div class="card-content">
-                  <div>
-                    <span class="card-title">{{ warning.title }}</span>
-                    <p>{{ warning.description }}</p>
-                  </div>
-                </div>
-              {% endfor %}
-          </div>
-        </div>
-      {% endif %}
-
-      {% if tasks %}
-        {% for task in tasks %}
-        <div class="card">
-          <div class="card-content">
-            <div class="row">
-              <span class="card-title">{{ task.title }}</span>
-            </div>
-
-            <div class="row">
-              <p>{{ task.description }}</p>
-            </div>
-
-            <div class="row">
-              <label>Anexos</label>
-            </div>
-
-            <div class="row">
-              <p><a href="/quiz/tasks/{{ task._id }}/tests/{{ task.test._id }}/answers/">{{ task.test.name }}</a></p>
-            </div>
-
-            <div class="row">
-              <label>Prazo</label>
-            </div>
-
-            <div class="row">
-
-              <div class="chip">
-                {{ task.deadline }}
+      <div class="row">
+        <div class="col l4">
+          {% if warnings %}
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Avisos</span>
+                  {% for warning in warnings %}
+                    <div class="card-content">
+                      <div>
+                        <span class="card-title">{{ warning.title }}</span>
+                        <p>{{ warning.description }}</p>
+                      </div>
+                    </div>
+                  {% endfor %}
               </div>
             </div>
-          </div>
+          {% endif %}
         </div>
-        {% endfor %}
-      {% endif %}
+
+        <div class="col l8">
+          {% if tasks %}
+            {% for task in tasks %}
+            <div class="card">
+              <div class="card-content">
+                <div class="row">
+                  <span class="card-title">{{ task.title }}</span>
+                </div>
+
+                <div class="row">
+                  <p>{{ task.description }}</p>
+                </div>
+
+                <div class="row">
+                  <label>Anexos</label>
+                </div>
+
+                <div class="row">
+                  <p><a href="/quiz/tasks/{{ task._id }}/tests/{{ task.test._id }}/answers/">{{ task.test.name }}</a></p>
+                </div>
+
+                <div class="row">
+                  <label>Prazo</label>
+                </div>
+
+                <div class="row">
+
+                  <div class="chip">
+                    {{ task.deadline }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
     </div>
   </body>
 </html>
