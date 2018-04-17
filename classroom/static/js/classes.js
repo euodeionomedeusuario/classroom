@@ -2,8 +2,10 @@
 
 /**/
 
+
 var PROTOCOL = window.location.protocol + "//";
-var HOSTNAME = window.location.hostname;
+var PORT = ":" + window.location.port;
+var HOSTNAME = window.location.hostname + PORT;
 
 function acceptInvite(invite) {
   var classId = $("#class-id").val();

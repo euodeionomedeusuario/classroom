@@ -2,8 +2,10 @@
 
 /*funções referentes a criação de disciplinas*/
 
+
 var PROTOCOL = window.location.protocol + "//";
-var HOSTNAME = window.location.hostname;
+var PORT = ":" + window.location.port;
+var HOSTNAME = window.location.hostname + PORT;
 
 $(document).ready(function(){
   /*criando uma nova disciplina*/

@@ -3,7 +3,8 @@
 /**/
 
 var PROTOCOL = window.location.protocol + "//";
-var HOSTNAME = window.location.hostname;
+var PORT = ":" + window.location.port;
+var HOSTNAME = window.location.hostname + PORT;
 
 $(document).ready(function(){
   /*Habilitando o uso de efeitos do Materialize nos selects*/

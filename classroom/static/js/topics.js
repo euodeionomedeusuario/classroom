@@ -2,8 +2,10 @@
 
 /*funções relacionadas a criação de tópicos*/
 
+
 var PROTOCOL = window.location.protocol + "//";
-var HOSTNAME = window.location.hostname;
+var PORT = ":" + window.location.port;
+var HOSTNAME = window.location.hostname + PORT;
 
 $(document).ready(function(){
   /*Recarregando as configurações de efeitos do Materialize nos selects*/
