@@ -54,21 +54,53 @@ def send_invite(class_id):
     return "OK"
 
 
+def getMes(mes):
+    if mes == 1:
+        return "Janeiro"
+    if mes == 2:
+        return "Fevereiro"
+    if mes == 3:
+        return "Março"
+    if mes == 4:
+        return "Abril"
+    if mes == 5:
+        return "Maio"
+    if mes == 6:
+        return "Junho"
+    if mes == 7:
+        return "Julho"
+    if mes == 8:
+        return "Agosto"
+    if mes == 9:
+        return "Setembro"
+    if mes == 10:
+        return "Outubro"
+    if mes == 11:
+        return "Novembro"
+    if mes == 12:
+        return "Dezembro"
+
+
 @app.route("/classroom/user/<user_id>/classes/<class_id>/", methods=["GET"])
 def get_index_student(class_id, user_id):
     date = datetime.datetime.now().strftime("%Y-%m-%d")
 
     classe = db.classes.find_one({"_id": ObjectId(class_id)})
+
+    users = []
+
+    for user_id in classe["participants"]:
+        u = db.users.find_one(user_id)
+        users.append(u)
+
     tasks = db.tasks.find({
         "class._id": classe["_id"],
         "deadline" : { "$gte" : date }
     }).sort([("deadline", -1)])
 
-    user = db.users.find_one({"_id": ObjectId(session["_id"])})
-
     warnings = db.warnings.find({"class._id": classe["_id"]})
 
-    return render_template("classes/student.html", c=classe, tasks=tasks, user=user, warnings=warnings)
+    return render_template("classes/student.html", c=classe, tasks=tasks, warnings=warnings, users=users)
 
 
 #Criando uma nova turma
