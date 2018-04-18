@@ -20,7 +20,7 @@ source nome_do_ambiente/bin/activate
 ```
 ### Baixando dependências
 ```
-pip3 install flask pymongo flask_mail gunicorn
+pip3 install -r requirements.txt
 ```
 ### Executando app
 ```
