@@ -1,5 +1,10 @@
 # Classroom
   Classroom is a virtual learning environment that allows the creation of classes, tasks and warnings in a simple way. It enables automatic and sharing of tests through a bank of questions offered.
+### Pré Requisitos
+* Python 3.x
+* Flask
+* gunicorn
+* MongoDB
 
 
 ### Clonando repositório
