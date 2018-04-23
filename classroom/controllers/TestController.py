@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- 
 from flask import session, jsonify, render_template, request
 
 import math

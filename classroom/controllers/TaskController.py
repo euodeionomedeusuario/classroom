@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- 
 from flask import request, session, render_template, jsonify
 from bson.objectid import ObjectId
 

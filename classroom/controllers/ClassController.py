@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- 
 import datetime
 
 from flask import request, session, render_template, jsonify, redirect
