@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 import datetime
 
 from flask import request, session, render_template, jsonify, redirect
@@ -102,7 +102,7 @@ def get_index_student(class_id, user_id):
 
     warnings = db.warnings.find({"class._id": classe["_id"]})
 
-    return render_template("classes/student.html", c=classe, tasks=tasks, warnings=warnings, users=users)
+    return render_template("classes/student.html", c=classe, tasks=tasks, warnings=warnings, participants=users)
 
 
 #Criando uma nova turma

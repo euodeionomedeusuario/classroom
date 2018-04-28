@@ -39,7 +39,9 @@ $(document).ready(function() {
   $(".button-collapse").sideNav();
 
   /*Habilitando modal*/
-  $(".modal-trigger").leanModal();
+  $('.modal').modal();
+
+  $('.tabs').tabs();
 
   $("#btn-left-class").click(function(event){
     var classId = $("#class-id").val();
