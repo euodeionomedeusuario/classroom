@@ -35,9 +35,19 @@
         </ul>
         <a data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
       </div>
+
+      <div class="nav-content">
+        <ul class="tabs tabs-transparent">
+          <li class="tab"><a class="active" href="#tasks">Tarefas</a></li>
+          <li class="tab"><a href="#warnings">Avisos</a></li>
+          <li class="tab"><a href="#invites">Convites</a></li>
+          <li class="tab"><a href="#participants">Participantes</a></li>
+        </ul>
+      </div>
     </nav>
 
-    <div class="container">
+    <!-- tarefas -->
+    <div class="container" id="tasks">
       <div class="card">
         <div class="card-content">
           <input type="hidden" id="class-id" value="{{ c._id }}">
@@ -45,41 +55,6 @@
           <h5>{{ c.description }}</h5>
         </div>
       </div>
-
-      {% if invites %}
-        <div class="card">
-          <div class="card-content">
-            <span class="card-title">Convites</span>
-              {% for invite in invites %}
-                <div>
-                  <h5>{{ invite.user.name }}</h5>
-                  <a onclick="acceptInvite('{{ invite._id }}');" class="btn green waves-effect waves-light">Aceitar</a>
-                  <a onclick="refuseInvite('{{ invite._id }}');" class="btn red waves-effect waves-light">Recusar</a>
-                </div>
-              {% endfor %}
-          </div>
-        </div>
-      {% endif %}
-
-      {% if warnings %}
-        <div class="card">
-          <div class="card-content">
-            <span class="card-title">Avisos</span>
-              {% for warning in warnings %}
-                <div class="card-content">
-                  <div>
-                    <span class="card-title">{{ warning.title }}</span>
-                    <p>{{ warning.description }}</p>
-                  </div>
-                  <div>
-                    <a onclick="fillModalEditWarning('{{ warning._id }}');" title="Editar Aviso" href="#modal-edit-warning" class="modal-trigger btn waves-effect waves-light red"><i class="material-icons">edit</i></a>
-                    <a onclick="deleteWarning('{{ warning._id }}');" title="Apagar Aviso" class="btn waves-effect waves-light red"><i class="material-icons">remove</i></a>
-                  </div>
-                </div>
-              {% endfor %}
-          </div>
-        </div>
-      {% endif %}
 
       {% if tasks %}
         {% for task in tasks %}
@@ -142,6 +117,55 @@
      </div>
 
     </div>
+
+    <!-- avisos -->
+    <div class="container" id="warnings">
+      {% if warnings %}
+        {% for warning in warnings %}
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">{{ warning.title }}</span>
+              <p>{{ warning.description }}</p>
+            </div>
+            <div class="card-action">
+              <a onclick="fillModalEditWarning('{{ warning._id }}');" title="Editar Aviso" href="#modal-edit-warning" class="modal-trigger btn waves-effect waves-light red"><i class="material-icons">edit</i></a>
+              <a onclick="deleteWarning('{{ warning._id }}');" title="Apagar Aviso" class="btn waves-effect waves-light red"><i class="material-icons">remove</i></a>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <!-- convites -->
+    <div class="container" id="invites">
+      {% if invites %}
+        {% for invite in invites %}
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">{{ invite.user.name }}</span>
+            </div>
+            <div class="card-action">
+              <a onclick="acceptInvite('{{ invite._id }}');" class="btn green waves-effect waves-light">Aceitar</a>
+              <a onclick="refuseInvite('{{ invite._id }}');" class="btn red waves-effect waves-light">Recusar</a>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <!-- participantes -->
+    <div class="container" id="participants">
+      {% if participants %}
+        {% for participant in participants %}
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">{{ participant.name }}</span>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
   </body>
 
   <!-- modal de edição de aviso -->

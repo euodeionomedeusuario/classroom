@@ -145,7 +145,13 @@ def get_class(class_id):
 
             warnings = db.warnings.find({"class._id": c["_id"]})
 
-            return render_template("classes/index.html", c=c, tasks=tasks, invites=invites, warnings=warnings)
+            users = []
+
+            for user_id in c["participants"]:
+                u = db.users.find_one(user_id)
+                users.append(u)
+
+            return render_template("classes/index.html", c=c, tasks=tasks, invites=invites, warnings=warnings, participants=users)
 
     except Exception as e:
         return render_template("errors/403.html")
