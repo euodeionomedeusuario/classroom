@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 from flask import session, jsonify, render_template, request
 
 import math
@@ -258,7 +258,10 @@ def send_answer(test_id):
                     if question["correctAnswer"] == question["answer"]:
                         num_correct_questions += 1
 
-    grade = num_correct_questions / num_questions * 10
+    if num_questions == 0:
+        grade = 0
+    else:
+        grade = num_correct_questions / num_questions * 10
 
     if last_answer:
         if last_answer["grade"] > grade:
