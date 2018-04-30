@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 from flask import render_template, redirect, request, jsonify
 from bson.objectid import ObjectId
 
@@ -12,7 +12,7 @@ def delete_warning(warning_id):
     db.warnings.remove({"_id": ObjectId(warning_id)})
 
     return "OK"
-    
+
 
 @app.route("/classroom/warnings/<warning_id>/", methods=["PUT"])
 def update_warning(warning_id):
