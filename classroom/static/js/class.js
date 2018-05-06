@@ -43,6 +43,25 @@ $(document).ready(function() {
 
   $('.tabs').tabs();
 
+  $(".deadlines").each(function(index, element) {
+
+            var value = $(this).text().split("-");
+
+            var day = value[2];
+            var month = value[1];
+            var year = value[0];
+
+            var date1 = new Date($(this).text());
+            var date2 = new Date();
+            var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+            var formatDate = day + " de " + month + " de " + year + " (" + diffDays + " dias )";
+
+            $(this).text(formatDate);
+
+        });
+
   $("#btn-left-class").click(function(event){
     var classId = $("#class-id").val();
 
