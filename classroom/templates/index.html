@@ -18,16 +18,24 @@
     <body>
 
       <!-- menu de navegação -->
-      <nav class="nav-extended red">
+      <nav class="red">
         <div class="nav-wrapper">
           <a href="/classroom/" class="brand-logo center">Classroom</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/classroom/quiz/">Quiz</a></li>
+            <li><a href="#modal-signup-in-class" class="modal-trigger">Inscrever-se em turma</a></li>
+            <li><a href="/classroom/users/">Configurações</a></li>
+            <li><a href="/classroom/logout/">Sair<i class="material-icons right">exit_to_app</i></a></li>
+          </ul>
+
           <ul id="slide-out" class="side-nav">
             <li><a href="/classroom/quiz/">Quiz</a></li>
             <li><a href="#modal-signup-in-class" class="modal-trigger">Inscrever-se em turma</a></li>
-            <li><a href="/classroom/users/">Editar perfil<i class="material-icons right">edit</i></a></li>
+            <li><a href="/classroom/users/">Configurações</a></li>
             <li><a href="/classroom/logout/">Sair<i class="material-icons right">exit_to_app</i></a></li>
           </ul>
-          <a data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
+          <a data-activates="slide-out" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a>
+
         </div>
       </nav>
 
@@ -59,15 +67,18 @@
 
           <div class="fixed-action-btn vertical click-to-toggle">
            <a class="btn-floating btn-large red">
-             <i class="material-icons">menu</i>
+             <i class="material-icons">add</i>
            </a>
            <ul>
              <li>
-               <a href="#new-class-modal" class="modal-trigger">Nova Turma</a>
+               <!-- Nova Turma -->
+               <a href="#new-class-modal" class="btn-floating btn-large modal-trigger"><i class="material-icons">group_add</i></a>
              </li>
 
+             <!-- Novo Teste-->
              <li>
-               <a href="/classroom/quiz/tests/" class="modal-trigger">Novo Teste</a>
+
+               <a href="/classroom/quiz/tests/" class="btn-floating btn-large blue modal-trigger"> <i class="material-icons ">assignment</i></a>
              </li>
            </ul>
          </div>

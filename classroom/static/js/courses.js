@@ -5,7 +5,9 @@
 
 var PROTOCOL = window.location.protocol + "//";
 var PORT = ":" + window.location.port;
-var HOSTNAME = window.location.hostname + PORT;
+var HOSTNAME = window.location.hostname;
+
+var URL = PROTOCOL + HOSTNAME + PORT;
 
 $(document).ready(function(){
   /*criando uma nova disciplina*/
@@ -13,11 +15,11 @@ $(document).ready(function(){
     var name = $("#modal-course-name").val();
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/quiz/courses/",
+      url: URL + "/quiz/courses/",
       type: "POST",
       data: {"name": name},
       success: function(data) {
-        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/quiz/tests/");
+        window.location.replace(URL + "/classroom/quiz/tests/");
       }
     });
   });

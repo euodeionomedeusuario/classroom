@@ -5,7 +5,10 @@
 
 var PROTOCOL = window.location.protocol + "//";
 var PORT = ":" + window.location.port;
-var HOSTNAME = window.location.hostname + PORT;
+var HOSTNAME = window.location.hostname;
+
+var URL = PROTOCOL + HOSTNAME + PORT;
+
 
 $(document).ready(function() {
   /*Habilitando o uso de efeitos do Materialize nos selects*/
@@ -25,7 +28,7 @@ $(document).ready(function() {
   /*Carregando disciplinas disponíveis no BD*/
   function loadCoursesForPainel() {
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/quiz/courses/",
+      url: URL + "/quiz/courses/",
       type: "GET",
       success: function(data) {
         $("#nq-course").empty();
@@ -41,7 +44,7 @@ $(document).ready(function() {
 
   $("#btnCreate").click(function(event) {
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/quiz/courses/",
+      url: URL + "/quiz/courses/",
       type: "GET",
       success: function(data) {
         for(index in data) {
@@ -95,7 +98,7 @@ $(document).ready(function() {
     $("#nq-topic").empty(); /*apagando tópicos antigos*/
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/quiz/courses/" + course + "/topics/",
+      url: URL + "/quiz/courses/" + course + "/topics/",
       type: "GET",
       success: function(data) {
         /*apagando disciplinas anteriores da tela*/
@@ -183,7 +186,7 @@ $(document).ready(function() {
     console.log(correctAnswer);
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/quiz/questions/",
+      url: URL + "/quiz/questions/",
       type: "POST",
       data: {private: p, title: title, type: type, level: level, topic: topic, correctAnswer: correctAnswer, answers: answers},
       success: function(data) {

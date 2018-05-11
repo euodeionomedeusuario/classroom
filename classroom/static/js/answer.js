@@ -4,7 +4,9 @@
 
 var PROTOCOL = window.location.protocol + "//";
 var PORT = ":" + window.location.port;
-var HOSTNAME = window.location.hostname + PORT;
+var HOSTNAME = window.location.hostname;
+
+var URL = PROTOCOL + HOSTNAME + PORT;
 
 $(document).ready(function(){
   /*Habilitando o uso de efeitos do Materialize nos selects*/
@@ -22,7 +24,7 @@ $(document).ready(function(){
     c = c - 1;
 
     if(c == 0) {
-      window.location.replace(PROTOCOL + HOSTNAME + "/classroom/");
+      window.location.replace(URL + "/classroom/");
     }
 
     t = setTimeout(function(){
@@ -44,12 +46,12 @@ $(document).ready(function(){
   function sendAnswer(test, answers, values) {
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/quiz/tests/" + test + "/answers/",
+      url: URL + "/quiz/tests/" + test + "/answers/",
       type: "POST",
       data: {answers: answers, values: values},
       success: function(data) {
         console.log("Test " + test + "answered in " + Date());
-        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/");
+        window.location.replace(URL + "/classroom/");
       }
     });
   }

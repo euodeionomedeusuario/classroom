@@ -5,7 +5,9 @@
 
 var PROTOCOL = window.location.protocol + "//";
 var PORT = ":" + window.location.port;
-var HOSTNAME = window.location.hostname + PORT;
+var HOSTNAME = window.location.hostname;
+
+var URL = PROTOCOL + HOSTNAME + PORT;
 
 $(document).ready(function(){
   /*Inicialzando collapse button*/
@@ -20,26 +22,26 @@ $(document).ready(function(){
     var classId = $("#modal-class-id").val();
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/classroom/classes/" + classId + "/invites/",
+      url: URL + "/classroom/classes/" + classId + "/invites/",
       type: "POST",
       success: function(event){
-        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/");
+        window.location.replace(URL + "/classroom/");
       }
     });
   });
 
   $("#btn-create-class").click(function(event) {
-    console.log(PROTOCOL + HOSTNAME);
+    console.log(URL);
 
     var name = $("#name").val();
     var description = $("#description").val();
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/classroom/classes/",
+      url: URL + "/classroom/classes/",
       type: "POST",
       data: {name: name, description: description},
       success: function(data) {
-        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/");
+        window.location.replace(URL + "/classroom/");
       }
     });
   });
