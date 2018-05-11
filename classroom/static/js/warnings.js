@@ -4,13 +4,14 @@
 
 var PROTOCOL = window.location.protocol + "//";
 var PORT = ":" + window.location.port;
-var HOSTNAME = window.location.hostname + PORT;
+var HOSTNAME = window.location.hostname;
 
+var URL = PROTOCOL + HOSTNAME + PORT;
 
 function fillModalEditWarning(warning_id) {
 
   $.ajax({
-    url: PROTOCOL + HOSTNAME + "/classroom/warnings/" + warning_id + "/",
+    url: URL + "/classroom/warnings/" + warning_id + "/",
     type: "GET",
     success: function(data) {
 
@@ -25,10 +26,10 @@ function deleteWarning(warning_id) {
   var classId = $("#class-id").val();
 
   $.ajax({
-    url: PROTOCOL + HOSTNAME + "/classroom/warnings/" + warning_id + "/",
+    url: URL + "/classroom/warnings/" + warning_id + "/",
     type: "DELETE",
     success: function(data) {
-      window.location.replace(PROTOCOL + HOSTNAME + "/classroom/classes/" + classId + "/")
+      window.location.replace(URL + "/classroom/classes/" + classId + "/")
 
     }
   });
@@ -42,11 +43,11 @@ $(document).ready(function() {
     var description = $("#modal-edit-warning-description").val();
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/classroom/warnings/" + warningId + "/",
+      url: URL + "/classroom/warnings/" + warningId + "/",
       type: "PUT",
       data: {"title": title, "description": description},
       success: function(data) {
-        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/classes/" + classId + "/")
+        window.location.replace(URL + "/classroom/classes/" + classId + "/")
       }
     });
   });

@@ -5,7 +5,10 @@
 
 var PROTOCOL = window.location.protocol + "//";
 var PORT = ":" + window.location.port;
-var HOSTNAME = window.location.hostname + PORT;
+var HOSTNAME = window.location.hostname;
+
+var URL = PROTOCOL + HOSTNAME + PORT;
+
 
 $(document).ready(function(){
   $("#btn-update-test").click(function(event){
@@ -22,11 +25,11 @@ $(document).ready(function(){
     });
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/quiz/tests/" + testId + "/",
+      url: URL + "/quiz/tests/" + testId + "/",
       type: "PUT",
       data: {"name": name, "description": description, "questions": questions, "ntime": time, "numAttempts": numAttempts},
       success: function(data) {
-        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/quiz/");
+        window.location.replace(URL + "/classroom/quiz/");
 
       }
     });

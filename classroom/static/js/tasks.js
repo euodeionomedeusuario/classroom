@@ -5,11 +5,14 @@
 
 var PROTOCOL = window.location.protocol + "//";
 var PORT = ":" + window.location.port;
-var HOSTNAME = window.location.hostname + PORT;
+var HOSTNAME = window.location.hostname;
+
+var URL = PROTOCOL + HOSTNAME + PORT;
+
 
 function fillModalEditTask(taskId) {
   $.ajax({
-    url: PROTOCOL + HOSTNAME + "/classroom/tasks/" + taskId + "/",
+    url: URL + "/classroom/tasks/" + taskId + "/",
     type: "GET",
     success: function(data) {
 
@@ -32,11 +35,11 @@ $(document).ready(function() {
     var deadline = $("#modal-edit-task-deadline").val();
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/classroom/tasks/" + taskId + "/",
+      url: URL + "/classroom/tasks/" + taskId + "/",
       type: "PUT",
       data: {"title": title, "description": description, "deadline": deadline},
       success: function(data) {
-        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/classes/" + classId + "/")
+        window.location.replace(URL + "/classroom/classes/" + classId + "/")
       }
     });
   });

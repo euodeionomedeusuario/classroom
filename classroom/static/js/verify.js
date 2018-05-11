@@ -5,7 +5,10 @@
 
 var PROTOCOL = window.location.protocol + "//";
 var PORT = ":" + window.location.port;
-var HOSTNAME = window.location.hostname + PORT;
+var HOSTNAME = window.location.hostname;
+
+var URL = PROTOCOL + HOSTNAME + PORT;
+
 
 $(document).ready(function(){
   /*Habilitando o uso de efeitos do Materialize nos selects*/
@@ -52,7 +55,7 @@ $(document).ready(function(){
     });
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/quiz/questions/" + questionId + "/",
+      url: URL + "/quiz/questions/" + questionId + "/",
       type: "PUT",
       data: {
         "title": title,
@@ -61,7 +64,7 @@ $(document).ready(function(){
         "private": p
       },
       success: function(data) {
-          window.location.replace(PROTOCOL + HOSTNAME + "/classroom/quiz/tests/" + testId + "/answers/");
+          window.location.replace(URL + "/classroom/quiz/tests/" + testId + "/answers/");
       }
     });
 
@@ -72,7 +75,7 @@ $(document).ready(function(){
     var questionId = $(this).siblings(".question-id").val();
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/quiz/questions/" + questionId + "/",
+      url: URL + "/quiz/questions/" + questionId + "/",
       type: "GET",
       success: function(data) {
 
@@ -129,10 +132,10 @@ $(document).ready(function(){
     var testId = $("#test-id").val();
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/quiz/tests/" + testId + "/",
+      url: URL + "/quiz/tests/" + testId + "/",
       type: "DELETE",
       success: function(data) {
-        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/quiz/");
+        window.location.replace(URL + "/classroom/quiz/");
       }
     });
   });
@@ -140,7 +143,7 @@ $(document).ready(function(){
   /*carregando turmas para compartilhar teste*/
   $("#btn-share-test").click(function(event) {
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/quiz/classes/",
+      url: URL + "/quiz/classes/",
       type: "GET",
       success: function(data) {
         for(index in data) {
@@ -170,12 +173,12 @@ $(document).ready(function(){
     var description = $("#modal-test-description").val(); /*nova descrição*/
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/quiz/tests/" + test + "/",
+      url: URL + "/quiz/tests/" + test + "/",
       type: "PUT",
       data: {name: name, description: description},
       success: function(data) {
         console.log("Test " + test + " updated in " + Date());
-        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/quiz/");
+        window.location.replace(URL + "/classroom/quiz/");
       }
     });
   });
@@ -190,12 +193,12 @@ $(document).ready(function(){
     var deadline = $("#deadline").val();
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/quiz/tests/" + test + "/classes/",
+      url: URL + "/quiz/tests/" + test + "/classes/",
       type: "PUT",
       data: {"test": test, "classe": classe, "title": title, "description": description, "deadline": deadline},
       success: function(data) {
         console.log("Test " + test + "shared in " + Date());
-        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/quiz/tests/" + test + "/answers/");
+        window.location.replace(URL + "/classroom/quiz/tests/" + test + "/answers/");
 
       }
     });

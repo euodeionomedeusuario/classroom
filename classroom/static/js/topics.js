@@ -5,7 +5,9 @@
 
 var PROTOCOL = window.location.protocol + "//";
 var PORT = ":" + window.location.port;
-var HOSTNAME = window.location.hostname + PORT;
+var HOSTNAME = window.location.hostname;
+
+var URL = PROTOCOL + HOSTNAME + PORT;
 
 $(document).ready(function(){
   /*Recarregando as configurações de efeitos do Materialize nos selects*/
@@ -18,11 +20,11 @@ $(document).ready(function(){
     var courseId = $("#modal-topic-course :checked").val();
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/quiz/topics/",
+      url: URL + "/quiz/topics/",
       type: "POST",
       data: {"name": name, "courseId": courseId},
       success: function(data) {
-        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/quiz/tests/");
+        window.location.replace(URL + "/classroom/quiz/tests/");
       }
     });
   });
@@ -30,7 +32,7 @@ $(document).ready(function(){
   /*carregando disciplinas para modal de criação de novo tópico*/
   $("#btn-call-modal-new-topic").click(function(event){
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/quiz/courses/",
+      url: URL + "/quiz/courses/",
       type: "GET",
       success: function(data) {
         $("#modal-topic-course").empty();

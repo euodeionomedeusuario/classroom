@@ -5,7 +5,10 @@
 
 var PROTOCOL = window.location.protocol + "//";
 var PORT = ":" + window.location.port;
-var HOSTNAME = window.location.hostname + PORT;
+var HOSTNAME = window.location.hostname;
+
+var URL = PROTOCOL + HOSTNAME + PORT;
+
 
 $(document).ready(function() {
   /*Inicializando o botão collapse*/
@@ -16,12 +19,12 @@ $(document).ready(function() {
     var testId = $("#test-id").val();
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/quiz/answers/" + answer + "/",
+      url: URL + "/quiz/answers/" + answer + "/",
       type: "PUT",
       data: {grade: grade},
       success: function(data) {
         console.log("Test's grade " + test + "updated in " + Date());
-        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/quiz/tests/" + testId + "/answers/");
+        window.location.replace(URL + "/classroom/quiz/tests/" + testId + "/answers/");
       }
     });
   }

@@ -5,16 +5,18 @@
 
 var PROTOCOL = window.location.protocol + "//";
 var PORT = ":" + window.location.port;
-var HOSTNAME = window.location.hostname + PORT;
+var HOSTNAME = window.location.hostname;
+
+var URL = PROTOCOL + HOSTNAME + PORT;
 
 function acceptInvite(invite) {
   var classId = $("#class-id").val();
 
   $.ajax({
-    url: PROTOCOL + HOSTNAME + "/classroom/invites/" + invite + "/",
+    url: URL + "/classroom/invites/" + invite + "/",
     type: "GET",
     success: function(event){
-      window.location.replace(PROTOCOL + HOSTNAME + "/classroom/classes/" + classId);
+      window.location.replace(URL + "/classroom/classes/" + classId);
     }
   });
 }
@@ -23,10 +25,10 @@ function refuseInvite(invite) {
   var classId = $("#class-id").val();
 
   $.ajax({
-    url: PROTOCOL + HOSTNAME + "/classroom/invites/" + invite + "/",
+    url: URL + "/classroom/invites/" + invite + "/",
     type: "DELETE",
     success: function(event){
-      window.location.replace(PROTOCOL + HOSTNAME + "/classroom/classes/" + classId);
+      window.location.replace(URL + "/classroom/classes/" + classId);
     }
   });
 }
@@ -66,10 +68,10 @@ $(document).ready(function() {
     var classId = $("#class-id").val();
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/classroom/classes/" + classId + "/participants/",
+      url: URL + "/classroom/classes/" + classId + "/participants/",
       type: "DELETE",
       success: function(event){
-        window.location.replace(PROTOCOL + HOSTNAME + "/classroom");
+        window.location.replace(URL + "/classroom");
       }
     });
   });
@@ -80,11 +82,11 @@ $(document).ready(function() {
     var description = $("#modal-warning-description").val();
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/classroom/classes/" + classId + "/warnings/",
+      url: URL + "/classroom/classes/" + classId + "/warnings/",
       type: "POST",
       data: {"title": title, "description": description, "created_at": new Date()},
       success: function(data) {
-        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/classes/" + classId + "/");
+        window.location.replace(URL + "/classroom/classes/" + classId + "/");
       }
     });
 
@@ -106,10 +108,10 @@ $(document).ready(function() {
     var taskId = $(this).siblings("#task-id").val();
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/classroom/tasks/" + taskId + "/",
+      url: URL + "/classroom/tasks/" + taskId + "/",
       type: "DELETE",
       success: function(data) {
-        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/classes/" + classId + "/");
+        window.location.replace(URL + "/classroom/classes/" + classId + "/");
       }
     });
   });
@@ -119,11 +121,11 @@ $(document).ready(function() {
     var email = $("#modal-class-email").val();
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/classroom/classes/" + classId + "/participants/",
+      url: URL + "/classroom/classes/" + classId + "/participants/",
       type: "PUT",
       data: {"email": email},
       success: function(data) {
-        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/classes/" + classId + "/");
+        window.location.replace(URL + "/classroom/classes/" + classId + "/");
       }
     });
   });
@@ -142,11 +144,11 @@ $(document).ready(function() {
     var description = $("#modal-class-description").val();
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/classroom/classes/" + classId + "/",
+      url: URL + "/classroom/classes/" + classId + "/",
       type: "PUT",
       data: {"name": name, "description": description},
       success: function(data) {
-        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/classes/" + classId + "/");
+        window.location.replace(URL + "/classroom/classes/" + classId + "/");
       }
     });
   });
@@ -156,10 +158,10 @@ $(document).ready(function() {
     var classId = $("#class-id").val();
 
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/classroom/classes/" + classId + "/",
+      url: URL + "/classroom/classes/" + classId + "/",
       type: "DELETE",
       success: function(data) {
-        window.location.replace(PROTOCOL + HOSTNAME + "/classroom/");
+        window.location.replace(URL + "/classroom/");
       }
     });
   });
@@ -167,7 +169,7 @@ $(document).ready(function() {
   /*carregando todos os questionários criados*/
   $("#btn-new-task-modal").click(function(event){
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/classroom/tests/",
+      url: URL + "/classroom/tests/",
       type: "GET",
       success: function(data){
         for(index in data) {
@@ -193,11 +195,11 @@ $(document).ready(function() {
         var deadline = $("#deadline").val();
 
         $.ajax({
-          url: PROTOCOL + HOSTNAME + "/classroom/tasks/",
+          url: URL + "/classroom/tasks/",
           type: "POST",
           data: {title: title, description: description, deadline: deadline, classId: classId, test: test},
           success: function(data) {
-            window.location.replace(PROTOCOL + HOSTNAME + "/classroom/classes/" + classId);
+            window.location.replace(URL + "/classroom/classes/" + classId);
           }
         });
       } else {
