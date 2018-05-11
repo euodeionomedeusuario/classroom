@@ -44,6 +44,8 @@ def redirect_quiz_login():
 
 #Verificando a autenticação do usuário
 @app.route("/classroom/login/", methods=["POST"])
+@app.route("/quiz/login/", methods=["POST"])
+
 def login():
     email = request.form.get("email")
     password = request.form.get("password")
@@ -58,6 +60,26 @@ def login():
 
     error = "E-mail ou senha estão incorretos!"
     return render_template("login/login.html", error=error)
+
+
+#Verificando a autenticação do usuário
+@app.route("/quiz/login/", methods=["POST"])
+
+def login():
+    email = request.form.get("email")
+    password = request.form.get("password")
+
+    user = db.users.find_one( {"email": email} )
+
+    if user:
+        if check_password_hash(user["password"], password):
+            session["email"] = user["email"]
+            session["_id"] = str(user["_id"])
+            return redirect("/classroom/quiz/")
+
+    error = "E-mail ou senha estão incorretos!"
+    return render_template("quiz/login/login.html", error=error)
+
 
 
 #Redirecionando usuário para a página de signup
