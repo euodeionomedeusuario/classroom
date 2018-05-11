@@ -44,8 +44,6 @@ def redirect_quiz_login():
 
 #Verificando a autenticação do usuário
 @app.route("/classroom/login/", methods=["POST"])
-@app.route("/quiz/login/", methods=["POST"])
-
 def login():
     email = request.form.get("email")
     password = request.form.get("password")
@@ -64,8 +62,7 @@ def login():
 
 #Verificando a autenticação do usuário
 @app.route("/quiz/login/", methods=["POST"])
-
-def login():
+def login_quiz():
     email = request.form.get("email")
     password = request.form.get("password")
 
@@ -88,6 +85,12 @@ def redirect_signup():
     return render_template("signup/signup.html")
 
 
+#Redirecionando usuário para a página de signup
+@app.route("/classroom/quiz/signup/", methods=["GET"])
+def redirect_quiz_signup():
+    return render_template("quiz/signup/signup.html")
+
+
 #Cadastrando um novo usuário
 @app.route("/classroom/signup/", methods=["POST"])
 def signup():
@@ -103,6 +106,24 @@ def signup():
     })
 
     return redirect("/classroom/")
+
+#Cadastrando um novo usuário
+@app.route("/quiz/signup/", methods=["POST"])
+def signup_quiz():
+    name = request.form.get("name")
+    email = request.form.get("email")
+    password = generate_password_hash(request.form.get("password"))
+
+    db.users.insert_one(
+    {
+        "name": name,
+        "email": email,
+        "password": password
+    })
+
+    return redirect("/classroom/quiz/")
+
+
 
 #Logout do sistema
 @app.route("/classroom/logout/", methods=["GET"])
