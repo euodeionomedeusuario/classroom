@@ -24,6 +24,7 @@ def index():
     # Redireciona o usuário para página de login
     return redirect("/classroom/login/")
 
+
 @app.route("/classroom/quiz/", methods=["GET"])
 def index_quiz():
 
@@ -40,4 +41,4 @@ def index_quiz():
         return render_template("quiz/index.html", created_tests=created_tests)
 
     # Redireciona o usuário para página de login
-    return redirect("/classroom/login/")
+    return redirect("/classroom/quiz/login/")

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 from flask import request, render_template, redirect, session
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -34,6 +34,12 @@ def redirect_user():
 @app.route("/classroom/login/", methods=["GET"])
 def redirect_login():
     return render_template("login/login.html")
+
+
+#Redirecionando usuário para a página de login
+@app.route("/classroom/quiz/login/", methods=["GET"])
+def redirect_quiz_login():
+    return render_template("quiz/login/login.html")
 
 
 #Verificando a autenticação do usuário
