@@ -42,3 +42,18 @@ def index_quiz():
 
     # Redireciona o usuário para página de login
     return redirect("/classroom/quiz/login/")
+
+# Rota para acessar página de tarefas
+@app.route("/classroom/questions/",methods=['GET'])
+def index_questions():
+        # Verifica se o usuário está logado, procurando pelo email dele na sessão
+        if "email" in session:
+
+            # Requisita do banco todas as questões
+            created_questions = db.tests.find()
+
+            # Renderiza a página mostrando todas questões
+            return render_template("questions/index.html", created_questions=created_questions)
+
+        # Redireciona o usuário para página de login
+        return redirect("/classroom")
