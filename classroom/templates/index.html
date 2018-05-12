@@ -39,6 +39,14 @@
       {% endif %}
       <!-- ============================================= -->
 
+      <!-- HTML que deve ser mostrado em "/classroom/questions/" -->
+      {% if questions %}
+        {% include 'questions/navbar.html' %}
+
+        {% include 'questions/show-questions.html' %}
+      {% endif %}
+      <!-- ============================================= -->
+
 
     </body>
 </html>
