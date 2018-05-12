@@ -125,21 +125,11 @@ $(document).ready(function(){
     return $question
   }
 
-  /*gerando pdf*/
-  $("#btnGeneratePDF").on("click", function() {
-    var doc = new jsPDF('p', 'mm', [400, 480]);
-
-    doc.fromHTML($("#questions-list").get(0), 20, 20, {
-      "width": 400 });
-
-    doc.save("exam.pdf");
-
-  });
 
   /*Carregando disciplinas disponíveis no BD*/
   function loadCourses() {
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/quiz/courses/",
+      url: URL + "/quiz/courses/",
       type: "GET",
       success: function(data) {
         for(index in data) {
@@ -156,7 +146,7 @@ $(document).ready(function(){
   /*Carregando os tópicos no BD*/
   function loadTopics(course) {
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/quiz/courses/" + course + "/topics/",
+      url: URL + "/quiz/courses/" + course + "/topics/",
       type: "GET",
       success: function(data) {
         for(index in data) {
@@ -194,7 +184,7 @@ $(document).ready(function(){
   /*Carregando questões consultadas no BD*/
   function loadQuestions(course, topic, number, level, type) {
     $.ajax({
-      url: PROTOCOL + HOSTNAME + "/quiz/tests/" + course + "/" + topic + "/",
+      url: URL + "/quiz/tests/" + course + "/" + topic + "/",
       type: "POST",
       /*Melhore esta parte*/
       data: { number: number, easy: level[0], medium: level[1], hard: level[2], type: type},
@@ -226,12 +216,12 @@ $(document).ready(function(){
       console.log("Ok");
       if(name) {
         $.ajax({
-          url: PROTOCOL + HOSTNAME + "/quiz/tests/",
+          url: URL + "/quiz/tests/",
           type: "POST",
           data: {"name": name, "description": description, "questions": questions, "ntime": time, "numAttempts": numAttempts},
           success: function(data) {
             console.log("New test saved in " + Date());
-            window.location.replace(PROTOCOL + HOSTNAME + "/classroom/quiz/");
+            window.location.replace(URL + "/classroom/quiz/");
 
           }
         });
