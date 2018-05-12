@@ -8,6 +8,27 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from classroom import app
 from classroom import db
 
+#Verificando a autenticação do usuário
+@app.route("/classroom/users/<user_id>/password/", methods=["PUT"])
+def update_password(user_id):
+    currentPassword = request.form.get("currentPassword")
+    password = request.form.get("newPassword")
+
+    user = db.users.find_one( {"_id": ObjectId(user_id)} )
+
+    print(currentPassword)
+    print(password)
+
+    if user:
+        if check_password_hash(user["password"], currentPassword):
+            password = generate_password_hash(password)
+
+            db.users.update({"_id": ObjectId(user_id)}, {"$set": {"password": password}})
+
+            return "OK", 200
+
+    return "Senha incorreta!", 400
+
 
 @app.route("/classroom/users/<user_id>/", methods=["PUT"])
 def update_user(user_id):
@@ -20,7 +41,6 @@ def update_user(user_id):
         if u:
             user = db.users.find_one({"_id": ObjectId(user_id)})
 
-            print(user["email"] != email)
             if user["email"] != email:
                 return "Este e-mail já está sendo usado por outro usuário!", 400
 
