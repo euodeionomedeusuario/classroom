@@ -19,7 +19,7 @@ def index():
         my_classes = db.classes.find( {"participants": {"$in": [ObjectId(session["_id"])]}} )
 
         # Renderiza a página principal mostrando as classes do usuário logado
-        return render_template("layout.html", classes=classes, my_classes=my_classes, user=session["_id"])
+        return render_template("index.html", classes=classes, my_classes=my_classes, user=session["_id"])
 
     # Redireciona o usuário para página de login
     return redirect("/classroom/login/")
