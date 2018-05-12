@@ -39,7 +39,9 @@
         </div>
       </nav>
 
-      <!-- Só mostrar as classes existentes se estiver no index do classroom -->
+      {% block show_classes %}
+
+      {% endblock %}
       {% if classes %}
       <div class="container">
         <div class="row">
@@ -56,10 +58,8 @@
 
         </div>
       </div>
-      {% endif %}
 
-
-      <!-- Modal de criação de nova turma -->
+      <!-- Modal de criação de nova turma (Opção válida apenas em "/classroom/").-->
       <div id="new-class-modal" class="modal">
         <div class="modal-content">
           <h4>Criando nova turma</h4>
@@ -74,8 +74,9 @@
           <a class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
         </div>
       </div>
+      <!-- ========================= -->
 
-      <!-- Modal para inscrição em turma pelo ID -->
+      <!-- Modal para inscrição em turma pelo ID (Opção válida apenas em "/classroom/"). -->
       <div id="modal-signup-in-class" class="modal">
         <div class="modal-content">
           <div class="row">
@@ -91,6 +92,10 @@
           <a class="btn-flat waves-green waves-effect modal-action modal-close">Cancelar</a>
         </div>
       </div>
+      <!-- ========================= -->
+
+      {% endif %}
+      <!-- ============================================================ -->
 
       <!-- Botão Flutuante de ações -->
       <div class="fixed-action-btn vertical click-to-toggle">

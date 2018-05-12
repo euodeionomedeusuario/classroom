@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Classroom</title>
+
+        <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+        <script src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+
+        <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+
+    </head>
+    <body>
+
+      <!-- Menu de navegação -->
+      <nav class="red">
+        <div class="nav-wrapper">
+          <a href="/classroom/" class="brand-logo center">Classroom</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/classroom/quiz/">Quiz</a></li>
+            <li><a href="#modal-signup-in-class" class="modal-trigger">Inscrever-se em turma</a></li>
+            <li><a href="/classroom/users/">Configurações</a></li>
+            <li><a href="/classroom/logout/">Sair<i class="material-icons right">exit_to_app</i></a></li>
+          </ul>
+
+          <ul id="slide-out" class="side-nav">
+            <li><a href="/classroom/quiz/">Quiz</a></li>
+            <li><a href="#modal-signup-in-class" class="modal-trigger">Inscrever-se em turma</a></li>
+            <li><a href="/classroom/users/">Configurações</a></li>
+            <li><a href="/classroom/logout/">Sair<i class="material-icons right">exit_to_app</i></a></li>
+          </ul>
+          <a data-activates="slide-out" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a>
+
+        </div>
+      </nav>
+
+
+      <!-- HTML que deve ser mostrado em "/classroom/" -->
+      {% if classes %}
+        {% include 'classes/show-classes.html' %}
+        {% include 'classes/modals.html' %}
+        {% include 'classes/floating-button.html' %}
+      {% endif %}
+      <!-- ============================================================ -->
+
+    </body>
+</html>
