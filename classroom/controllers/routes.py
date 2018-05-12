@@ -50,10 +50,10 @@ def index_questions():
         if "email" in session:
 
             # Requisita do banco todas as questões
-            created_questions = db.tests.find()
+            questions = db.questions.find()
 
             # Renderiza a página mostrando todas questões
-            return render_template("questions/index.html", created_questions=created_questions)
+            return render_template("index.html", questions=questions)
 
         # Redireciona o usuário para página de login
         return redirect("/classroom")

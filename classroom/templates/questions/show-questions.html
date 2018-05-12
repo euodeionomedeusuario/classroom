@@ -1,0 +1,28 @@
+<!-- Só mostrar as questões existentes se estiver em "/classroom/questions" -->
+<div class="container">
+  <div class="row" id="cards-container">
+
+      <!-- Lista de questões -->
+      {% for question in questions %}
+      <!-- Each stage card takes 3 columns wide -->
+      <div class="col s3">
+
+        <div class="card">
+          <div class="card-image">
+            <img src="http://materializecss.com/images/sample-1.jpg" alt="A lake and tree around some mountains.">
+            <span class="card-title">{{ question.title }} </span>
+            <a onclick="" href="/classroom/questions/{{ question._id }}" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+          </div>
+
+          <div class="card-content">
+            <p class="truncate">
+              Disciplina:{{ question.topic.course.name }}
+              Tópico: {{ question.topic.name }}
+            </p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+  </div>
+</div>
