@@ -32,13 +32,13 @@ def index_quiz():
     if "email" in session:
 
         # Requisita do banco os quizes criados pelo usuário
-        created_tests = db.tests.find(
+        quizzes = db.tests.find(
                         {
                             "creator._id" : ObjectId(session["_id"])
                         })
 
         # Renderiza a página mostrando os quizes do usuário logado
-        return render_template("quiz/index.html", created_tests=created_tests)
+        return render_template("index.html", quizzes=quizzes)
 
     # Redireciona o usuário para página de login
     return redirect("/classroom/quiz/login/")

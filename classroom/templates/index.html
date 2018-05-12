@@ -18,35 +18,27 @@
     <body>
 
       <!-- Menu de navegação -->
-      <nav class="red">
-        <div class="nav-wrapper">
-          <a href="/classroom/" class="brand-logo center">Classroom</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="/classroom/quiz/">Quiz</a></li>
-            <li><a href="#modal-signup-in-class" class="modal-trigger">Inscrever-se em turma</a></li>
-            <li><a href="/classroom/users/">Configurações</a></li>
-            <li><a href="/classroom/logout/">Sair<i class="material-icons right">exit_to_app</i></a></li>
-          </ul>
-
-          <ul id="slide-out" class="side-nav">
-            <li><a href="/classroom/quiz/">Quiz</a></li>
-            <li><a href="#modal-signup-in-class" class="modal-trigger">Inscrever-se em turma</a></li>
-            <li><a href="/classroom/users/">Configurações</a></li>
-            <li><a href="/classroom/logout/">Sair<i class="material-icons right">exit_to_app</i></a></li>
-          </ul>
-          <a data-activates="slide-out" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a>
-
-        </div>
-      </nav>
-
 
       <!-- HTML que deve ser mostrado em "/classroom/" -->
       {% if classes %}
+        {% include 'classes/navbar.html' %}
+
         {% include 'classes/show-classes.html' %}
         {% include 'classes/modals.html' %}
+
         {% include 'classes/floating-button.html' %}
       {% endif %}
-      <!-- ============================================================ -->
+      <!-- ============================================= -->
+
+      <!-- HTML que deve ser mostrado em "/classroom/quiz/" -->
+      {% if quizzes %}
+        {% include 'quiz/navbar.html' %}
+
+        {% include 'quiz/show-quizzes.html' %}
+        {% include 'quiz/floating-button.html' %}
+      {% endif %}
+      <!-- ============================================= -->
+
 
     </body>
 </html>
