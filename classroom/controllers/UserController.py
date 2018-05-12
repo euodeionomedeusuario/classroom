@@ -9,18 +9,27 @@ from classroom import app
 from classroom import db
 
 
-#atualizando informações sobre o usuário
 @app.route("/classroom/users/<user_id>/", methods=["PUT"])
 def update_user(user_id):
     try:
         name = request.form.get("name")
         email = request.form.get("email")
 
+        u = db.users.find_one({"email": email})
+
+        if u:
+            user = db.users.find_one({"_id": ObjectId(user_id)})
+
+            print(user["email"] != email)
+            if user["email"] != email:
+                return "Este e-mail já está sendo usado por outro usuário!", 400
+
         db.users.update({"_id": ObjectId(user_id)}, {"$set": {"name": name, "email": email}})
 
         return "OK", 200
-    except Exception as e:
-        return "Invalid Request", 400
+    except:
+        return "Error", 400
+
 
 #redirecionando para página de edição de usuário
 @app.route("/classroom/users/", methods=["GET"])
