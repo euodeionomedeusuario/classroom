@@ -17,16 +17,7 @@
     <body>
 
       <!-- menu de navegação -->
-      <nav class="nav-extended blue">
-        <div class="nav-wrapper">
-          <a href="/classroom/quiz/" class="brand-logo center">Quiz</a>
-          <ul id="slide-out" class="side-nav">
-            <li><a href="/classroom/">Classroom</a></li>
-            <li><a href="/classroom/logout/">Sair<i class="material-icons right">exit_to_app</i></a></li>
-          </ul>
-          <a data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
-        </div>
-      </nav>
+      {% include 'quiz/navbar.html' %}
 
       <div class="container">
         <!-- informações sobre o questionário -->
