@@ -43,5 +43,30 @@ $(document).ready(function(){
     });
   });
 
+  $("#btnUpdatePassword").click(function(event){
+    userId = $("#userId").val();
+    var currentPassword = $("#currentPassword").val();
+    var p1 = $("#newPassword").val();
+    var p2 = $("#newPassword2").val();
+
+    if(p1 == p2) {
+      $.ajax({
+        url: URL + "/classroom/users/" + userId + "/password/",
+        type: "PUT",
+        data: {"currentPassword": currentPassword,"newPassword": p1},
+        success: function(data) {
+          window.location.replace(URL + "/classroom/");
+        },
+        error: function(data) {
+          $("#password-error").css("display", "block").css("color", "red").text("Senha incorreta!");
+        }
+      });
+
+    } else {
+      $("#password-error").css("display", "block").css("color", "red").text("Senhas não são iguais!");
+
+    }
+
+  });
 
 });
