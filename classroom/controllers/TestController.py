@@ -281,7 +281,7 @@ def send_answer(test_id):
 
     return "OK"
 
-
+'''
 #Retornando um teste pelo ID
 @app.route("/classroom/quiz/classes/<class_id>/tests/<test_id>/", methods=["GET"])
 def get_test_by_id(class_id, test_id):
@@ -327,7 +327,61 @@ def get_test_by_id(class_id, test_id):
     test["questions"] = questions
 
     return render_template("quiz/tests/answer_test.html", test=test, num_attempts=num_attempts)
+'''
 
+#Retornando um teste pelo ID
+@app.route("/classroom/quiz/classes/<class_id>/tests/<test_id>/", methods=["GET"])
+def get_test_by_id(class_id, test_id):
+    try:
+        user = db.users.find_one({"_id": ObjectId(session["_id"])})
+        classe = db.classes.find_one( {"_id": ObjectId(class_id), "participants": {"$in": [ObjectId(user["_id"])]}} )
+        test = db.tests.find_one( {"_id": ObjectId(test_id)} )
+
+    except:
+        return render_template("errors/404.html"), 404
+
+    if classe == None:
+        return render_template("errors/403.html"), 403
+
+    attempt = db.attempts.find_one({"user": user["_id"], "test": test["_id"]})
+
+    print(attempt)
+
+    if attempt:
+        db.attempts.update(
+            {"_id": attempt["_id"]},
+            { "$inc": { "number": 1}
+        })
+        print(test["numAttempts"])
+        if(( attempt["number"] + 1 ) > int(test["numAttempts"])):
+            return render_template("errors/403.html")
+
+        num_attempts=(int(test["numAttempts"]) - attempt["number"])
+
+    else:
+        db.attempts.insert({"user": user["_id"], "test": test["_id"], "number": 1})
+        num_attempts=(int(test["numAttempts"]) - 1)
+
+    answer = db.answers.find_one({"user._id": ObjectId(session["_id"]), "test._id": test["_id"]})
+
+    test["_id"] = str(test["_id"])
+    test["creator"]["_id"] = str(test["creator"]["_id"])
+
+    questions = []
+    for id in test["questions"]:
+        item = db.questions.find_one({"_id": ObjectId(id)})
+
+        if item["_id"]:
+            item["_id"] = str(item["_id"])
+            item["topic"]["_id"] = str(item["topic"]["_id"])
+            item["topic"]["course"]["_id"] = str(item["topic"]["course"]["_id"])
+            if item["type"] == "multipleChoice" or item["type"] == "trueOrFalse":
+                random.shuffle(item["choices"])
+        questions.append(item)
+
+    test["questions"] = questions
+
+    return render_template("quiz/tests/answer_test.html", test=test, num_attempts=num_attempts)
 
 #retornando testes criados
 @app.route("/classroom/tests/", methods=["GET"])

@@ -23,9 +23,10 @@ def accept_invite(invite_id):
         db.invites.remove({"_id": ObjectId(invite_id)})
 
     except Exception as error:
-        print(error)
+        return "Error", 400
 
     return "OK"
+
 
 #apagando convite para entrar em turma
 @app.route("/classroom/invites/<invite_id>/", methods=["DELETE"])

@@ -12,6 +12,8 @@ var URL = PROTOCOL + HOSTNAME + PORT;
 function acceptInvite(invite) {
   var classId = $("#class-id").val();
 
+  console.log("ok");
+
   $.ajax({
     url: URL + "/classroom/invites/" + invite + "/",
     type: "GET",
