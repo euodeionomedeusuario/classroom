@@ -106,7 +106,7 @@
        </a>
        <ul>
          <li>
-           <a id="btn-remove-class" href="#share-class-modal" class="btn-floating red darken-2 btn-large  modal-trigger tooltipped" data-position="left" data-tooltip="Apagar Turma"><i class="material-icons">delete</i></a>
+           <a href="#modal-delete-class" class="btn-floating red lighten-1 btn-large modal-trigger tooltipped" data-position="left" data-tooltip="Apagar Turma"><i class="material-icons">delete</i></a>
          </li>
 
          <li>
@@ -178,6 +178,18 @@
     </div>
 
   </body>
+
+
+  <!-- Modal para confirmar exclusão -->
+  <div id="modal-delete-class" class="modal">
+    <div class="modal-content">
+      <h5>Excluir turma ?</h5>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-action modal-close waves-effect waves-green btn-flat">Não</a>
+      <a id="btn-remove-class" class="modal-action modal-close waves-effect waves-green btn-flat">Sim</a>
+    </div>
+  </div>
 
   <!-- modal de edição de aviso -->
   <div id="modal-edit-warning" class="modal">
