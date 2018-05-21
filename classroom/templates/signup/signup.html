@@ -51,6 +51,12 @@
           <input type="email" name="email" required>
         </div>
 
+        {% if error %}
+          <div class="row">
+            <span style="color: red; font-weight: bold;">{{error}}</span>
+          </div>
+        {% endif %}
+
         <div class="row">
           <label>Senha</label>
           <input id="newPassword" type="password" name="password" required>

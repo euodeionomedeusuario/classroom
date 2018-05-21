@@ -127,14 +127,19 @@ def signup():
     email = request.form.get("email")
     password = generate_password_hash(request.form.get("password"))
 
-    db.users.insert_one(
-    {
-        "name": name,
-        "email": email,
-        "password": password
-    })
+    user = db.users.find_one({"email": email})
 
-    return redirect("/classroom/")
+    if user:
+        return render_template("signup/signup.html", error="E-mail já está sendo usado por outro usuário!")
+    else:
+        db.users.insert_one(
+        {
+            "name": name,
+            "email": email,
+            "password": password
+        })
+
+        return redirect("/classroom/")
 
 #Cadastrando um novo usuário
 @app.route("/quiz/signup/", methods=["POST"])
@@ -143,14 +148,19 @@ def signup_quiz():
     email = request.form.get("email")
     password = generate_password_hash(request.form.get("password"))
 
-    db.users.insert_one(
-    {
-        "name": name,
-        "email": email,
-        "password": password
-    })
+    user = db.users.find_one({"email": email})
 
-    return redirect("/classroom/quiz/")
+    if user:
+        return render_template("quiz/signup/signup.html", error="E-mail já está sendo usado por outro usuário!")
+    else:
+        db.users.insert_one(
+        {
+            "name": name,
+            "email": email,
+            "password": password
+        })
+
+        return redirect("/classroom/quiz/")
 
 
 
