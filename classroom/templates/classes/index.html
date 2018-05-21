@@ -62,8 +62,20 @@
       <div class="card">
         <div class="card-content">
           <input type="hidden" id="class-id" value="{{ c._id }}">
-          <h4 class="card-title">{{ c.name }}</h4>
-          <h5>{{ c.description }}</h5>
+          <label>Nome da Turma</label>
+          <span class="card-title">{{ c.name }}</span>
+
+          <label>Descrição da Turma</label>
+          <span>
+            {% if c.description %}
+              <span class="card-title">{{ c.description }}</span>
+            {% else %}
+              <br>
+            {%  endif %}
+          </span>
+
+          <label>Criador</label>
+          <span class="card-title">{{ c.creator.name }}</span>
         </div>
       </div>
 
