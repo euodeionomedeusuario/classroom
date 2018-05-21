@@ -71,13 +71,30 @@
         {% for task in tasks %}
         <div class="card">
           <div class="card-content">
-            <span class="card-title">{{ task.title }}</span>
-            <p>{{ task.description }}</p>
+            <div class="row">
+              <div class="col s12 m6 l6">
+                <span class="card-title"><b>{{ task.title }}</b></span>
+              </div>
+              <div class="col s12 m6 l6">
+                <span class="card-title deadlines">{{ task.deadline }}</span>
+              </div>
+            </div>
 
-            <label>Testes</label>
-            <p>{{ task.test.name }}</p>
+            {% if task.description %}
+              <div class="row">
+                <p>{{ task.description }}</p>
+              </div>
+            {% endif %}
 
-            <p class="deadlines">{{ task.deadline }}</p>
+            <div class="row">
+              <div class="col s12 m12 l12">
+                <label>Teste em anexo</label>
+              </div>
+              <div class="col s12 m12 l12">
+                <p>{{ task.test.name }}</p>
+              </div>
+            </div>
+
           </div>
           <div class="card-action">
             <div class="col s12 m12 l12">
