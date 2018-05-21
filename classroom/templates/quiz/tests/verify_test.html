@@ -24,10 +24,13 @@
         <div class="card">
             <div class="card-content">
               <input type="hidden" id="test-id" value="{{ test._id }}">
-                <label>Nome</label>
-                <h5 id="name">{{ test.name }}</h5>
-                <label>Descrição</label>
-                <h5 id="description">{{ test.description }}</h5>
+              <label>Nome do Teste</label><br>
+              <span class="card-title" id="name">{{ test.name }}</span><br>
+              <label>Descrição da Turma</label><br>
+              <span class="card-title">{{ test.description }}</span><br>
+              <label>Criador</label><br>
+              <span class="card-title">{{ test.creator.name }}</span>
+
             </div>
         </div>
 
