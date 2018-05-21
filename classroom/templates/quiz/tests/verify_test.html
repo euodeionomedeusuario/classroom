@@ -7,106 +7,142 @@
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Quiz</title>
 
-        <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
-        <script src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+
+        <!-- Compiled and Minified jQuery -->
+        <script
+      			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+      			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      			  crossorigin="anonymous">
+        </script>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
 
         <script src="{{ url_for('static', filename='js/verify.js') }}"></script>
     </head>
     <body>
 
       <!-- menu de navegação -->
-      {% include 'quiz/navbar.html' %}
+      <nav class="nav-extended blue">
+        <div class="nav-wrapper">
+          <a href="/classroom/quiz/" class="brand-logo center">Quiz</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/classroom/">Classroom</a></li>
+            <li><a href="/classroom/users/">Configurações</a></li>
+            <li><a href="/classroom/logout/">Sair<i class="material-icons right">exit_to_app</i></a></li>
+          </ul>
 
-      <div class="container">
-        <!-- informações sobre o questionário -->
-        <div class="card">
-            <div class="card-content">
-              <input type="hidden" id="test-id" value="{{ test._id }}">
-              <label>Nome do Teste</label><br>
-              <span class="card-title" id="name">{{ test.name }}</span><br>
-              <label>Descrição da Turma</label><br>
-              <span class="card-title">{{ test.description }}</span><br>
-              <label>Criador</label><br>
-              <span class="card-title">{{ test.creator.name }}</span>
+          <ul id="slide-out" class="side-nav">
+            <li><a href="/classroom/">Classroom</a></li>
+            <li><a href="/classroom/users/">Configurações</a></li>
+            <li><a href="/classroom/logout/">Sair<i class="material-icons right">exit_to_app</i></a></li>
+          </ul>
+          <a data-activates="slide-out" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a>
 
-            </div>
         </div>
 
-        <!-- lista de questões -->
-        {% if questions %}
-          {% for question in questions %}
-            <div class="card">
+        <div class="nav-content">
+          <ul class="tabs tabs-transparent">
+            <li class="tab"><a class="active" href="#inicio">Início</a></li>
+            <li class="tab"><a href="#answers">Respostas</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div id="inicio">
+          <!-- informações sobre o questionário -->
+          <div class="card">
               <div class="card-content">
-                <span class="card-title">{{ question.title }}</span>
-                {% if question.type == "multipleChoice" %}
-                  <ol>
-                    {% for choice in question.choices %}
-                      <li>{{ choice }}</li>
-                    {% endfor %}
-                  </ol>
-                {% endif %}
+                <input type="hidden" id="test-id" value="{{ test._id }}">
+                <label>Nome do Teste</label><br>
+                <span class="card-title" id="name">{{ test.name }}</span><br>
+                <label>Descrição da Turma</label><br>
+                <span class="card-title">{{ test.description }}</span><br>
+                <label>Criador</label><br>
+                <span class="card-title">{{ test.creator.name }}</span>
+
               </div>
-              <div class="card-action">
-                <!-- ID da questão -->
-                <input class="question-id" type="hidden" value="{{ question._id }}">
-
-                <!-- botão para remover questão -->
-                <!--<a href="" class="btn-remove-question-of-test2 btn red waves-effect waves-light white-text">
-                  <i class="material-icons">remove</i>
-                </a>-->
-
-                <!-- botão para editar questão -->
-                <a href="#modal-edit-question" class="btn-call-modal-edit-question modal-trigger btn blue waves-effect waves-light white-text">
-                  <i class="material-icons">edit</i>
-                </a>
-              </div>
-            </div>
-          {%  endfor %}
-        {% endif %}
-
-        <!-- respostas dos usuários do teste -->
-        <div class="card">
-          <div class="card-content">
-            <span class="card-title">Respostas do Quiz</span>
           </div>
-          {% if answers %}
-            {% for answer in answers %}
-              <div class="card-content">
-                <div class="row">
-                  <div class="col s12 m6 l6">
-                    <label>Nome</label>
-                    <h5>{{ answer.user.name }}</h5>
-                  </div>
-                  <div class="col s12 m6 l6">
-                      <label>Nota</label>
-                      <h5>{{ answer.grade }}</h5>
-                  </div>
+
+          <!-- lista de questões -->
+          {% if questions %}
+            {% for question in questions %}
+              <div class="card">
+                <div class="card-content">
+                  <span class="card-title">{{ question.title }}</span>
+                  {% if question.type == "multipleChoice" %}
+                    <ol>
+                      {% for choice in question.choices %}
+                        <li>{{ choice }}</li>
+                      {% endfor %}
+                    </ol>
+                  {% endif %}
+                </div>
+                <div class="card-action">
+                  <!-- ID da questão -->
+                  <input class="question-id" type="hidden" value="{{ question._id }}">
+
+                  <!-- botão para remover questão -->
+                  <!--<a href="" class="btn-remove-question-of-test2 btn red waves-effect waves-light white-text">
+                    <i class="material-icons">remove</i>
+                  </a>-->
+
+                  <!-- botão para editar questão -->
+                  <a href="#modal-edit-question" class="btn-call-modal-edit-question modal-trigger btn blue waves-effect waves-light white-text">
+                    <i class="material-icons">edit</i>
+                  </a>
                 </div>
               </div>
-              <div class="card-action">
-                  <a href="/classroom/quiz/answers/{{ answer._id}}" class="waves-effect waves-light btn blue white-text">Ver</i></a>
-              </div>
-            {% endfor %}
+            {%  endfor %}
           {% endif %}
         </div>
 
-        <div class="fixed-action-btn vertical click-to-toggle">
-         <a class="btn-floating btn-large blue">
-           <i class="material-icons">menu</i>
-         </a>
-         <ul>
-           <li>
-             <a href="/classroom/quiz/tests/{{ test._id }}/">Editar Teste</a>
-           </li>
+        <div id="answers">
+          <!-- respostas dos usuários do teste -->
+            {% if answers %}
+              {% for answer in answers %}
+                <div class="card">
+                  <div class="card-content">
+                    <div class="row">
+                      <div class="col s12 m6 l6">
+                        <label>Nome</label>
+                        <h5>{{ answer.user.name }}</h5>
+                      </div>
+                      <div class="col s12 m6 l6">
+                          <label>Nota</label>
+                          <h5>{{ answer.grade }}</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-action">
+                      <a href="/classroom/quiz/answers/{{ answer._id}}" class="waves-effect waves-light btn blue white-text">Ver</i></a>
+                  </div>
+                </div>
 
-           <li>
-             <a href="#" id="btn-remove-test">Apagar Teste</a>
-           </li>
+              {% endfor %}
+            {% endif %}
 
-         </ul>
-       </div>
+      </div> <!-- #answers -->
+
+      <div class="fixed-action-btn vertical click-to-toggle">
+       <a class="btn-floating btn-large blue">
+         <i class="material-icons">menu</i>
+       </a>
+       <ul>
+         <li>
+           <a href="/classroom/quiz/tests/{{ test._id }}/">Editar Teste</a>
+         </li>
+
+         <li>
+           <a href="#" id="btn-remove-test">Apagar Teste</a>
+         </li>
+
+       </ul>
+     </div>
 
       </div>
 

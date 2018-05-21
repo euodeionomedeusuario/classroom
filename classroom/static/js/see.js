@@ -11,6 +11,8 @@ var URL = PROTOCOL + HOSTNAME + PORT;
 
 
 $(document).ready(function() {
+  $('.tabs').tabs();
+
   /*Inicializando o botão collapse*/
   $(".button-collapse").sideNav();
 
