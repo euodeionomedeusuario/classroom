@@ -174,6 +174,8 @@ $(document).ready(function() {
       url: URL + "/classroom/tests/",
       type: "GET",
       success: function(data){
+        $("#test").empty();
+
         for(index in data) {
           $("#test").append($("<option />").text(data[index]["name"]).attr("value", data[index]["_id"]));
         }
