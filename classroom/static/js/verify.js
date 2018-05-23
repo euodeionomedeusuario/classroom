@@ -17,9 +17,9 @@ $(document).ready(function(){
   /*Inicializando o botão collapse*/
   $(".button-collapse").sideNav();
 
-  /*Inicializando os modais*/
-  $('.modal-trigger').leanModal();
-
+  /*Habilitando modal*/
+  $('.modal').modal();
+  
   /*adicionando um novo campo de opção*/
   $("#btn-add-option").click(function(event) {
     var $option = $("<li />")

@@ -14,7 +14,7 @@ $(document).ready(function(){
   $(".button-collapse").sideNav();
 
   /*Habilitando modal*/
-  $(".modal-trigger").leanModal();
+  $('.modal').modal();
 
 
   /*registrando-se em nova turma*/

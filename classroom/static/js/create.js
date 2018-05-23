@@ -14,9 +14,6 @@ $(document).ready(function() {
   /*Habilitando o uso de efeitos do Materialize nos selects*/
   $("select").material_select();
 
-  /*Inicializando os modais*/
-  $(".modal-trigger").leanModal();
-
   /*Criando uma nova disciplina*/
   function createCourse(course) {
     $course = $("<option />").text(course["name"]).attr("value", course["_id"]);

@@ -18,6 +18,9 @@ $(document).ready(function(){
   // Initialize collapsible (uncomment the line below if you use the dropdown variation)
   $('.collapsible').collapsible();
 
+  /*Habilitando modal*/
+  $('.modal').modal();
+
   $(".btn-remove-question-of-test").click(function(event){
     $(this).parent().remove();
   });
