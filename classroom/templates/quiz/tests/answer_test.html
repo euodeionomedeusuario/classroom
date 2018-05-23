@@ -7,12 +7,8 @@
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Quiz</title>
 
-        <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
-
-        <script src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-
+        {% include 'css.html' %}
+        
         <script src="{{ url_for('static', filename='js/answer.js') }}"></script>
    </head>
     <body>
