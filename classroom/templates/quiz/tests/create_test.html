@@ -14,7 +14,13 @@
         <script src="{{ url_for('static', filename='js/courses.js') }}"></script>
         <script src="{{ url_for('static', filename='js/topics.js') }}"></script>
 
-        <link rel = "stylesheet" href = "{{ url_for('static', filename='css/create.css') }}">
+        <script>
+          $(document).ready(function() {
+            $("#btnClear").click(function(e){
+              $("#questions-list").empty();
+            });
+          });
+        </script>
 
     </head>
     <body style="background-color: #D3D3D3">
@@ -121,6 +127,7 @@
                 <div class="card-action">
                   <!-- <a class="btn waves-effect waves-light blue white-text" id="btnGeneratePDF">Baixar<i class="material-icons right">get_app</i></a> -->
                   <a class="btn waves-effect waves-light blue white-text" id="btnSave">Salvar<i class="material-icons right">save</i></a>
+                  <a class="btn waves-effect waves-light blue white-text" id="btnClear" onClick="clear();">Limpar<i class="material-icons right">clear</i></a>
 
                 </div>
                 <div class="card-content" style="background-color: #006DAA; color: white;">
