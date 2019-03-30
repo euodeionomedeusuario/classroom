@@ -17,7 +17,7 @@
         <link rel = "stylesheet" href = "{{ url_for('static', filename='css/create.css') }}">
 
     </head>
-    <body>
+    <body style="background-color: #D3D3D3">
 
       <!-- menu de navegação -->
       {% include 'quiz/navbar.html' %}
@@ -26,6 +26,11 @@
       <div class="row">
         <div class="col s12 m6 l3">
           <div class="card">
+            <div class="card-content" style="background-color: #006DAA; color: white;">
+                <span class="card-title center" style="text-transform: uppercase;">
+                  <strong>Menu de Pesquisa</strong>
+                </span>
+            </div>
             <div class="card-content">
                 <div class="row">
                   <label>Disciplinas</label>
@@ -91,10 +96,10 @@
         <div class="row">
           <div class="col s12 m6 l9">
             <div class="card">
-                <div class="card-action">
-                  <!-- <a class="btn waves-effect waves-light blue white-text" id="btnGeneratePDF">Baixar<i class="material-icons right">get_app</i></a> -->
-                  <a class="btn waves-effect waves-light blue white-text" id="btnSave">Salvar<i class="material-icons right">save</i></a>
-
+                <div class="card-content" style="background-color: #006DAA; color: white;">
+                    <span class="card-title center" style="text-transform: uppercase;">
+                      <strong>Questionário</strong>
+                    </span>
                 </div>
 
                 <div class="card-content">
@@ -112,13 +117,28 @@
 
                   <label>Tempo (em minutos)</label>
                   <input type="number" id="time" min="1" value="1">
+                </div>
+                <div class="card-action">
+                  <!-- <a class="btn waves-effect waves-light blue white-text" id="btnGeneratePDF">Baixar<i class="material-icons right">get_app</i></a> -->
+                  <a class="btn waves-effect waves-light blue white-text" id="btnSave">Salvar<i class="material-icons right">save</i></a>
+
+                </div>
+                <div class="card-content" style="background-color: #006DAA; color: white;">
+                    <span class="card-title center" style="text-transform: uppercase;">
+                      <strong>Questões</strong>
+                    </span>
+                </div>
+
+                <div class="card-content">
 
                   <ol class="card-title" id="questions-list"></ol>
                 </div>
 
             </div>
           </div>
+
         </div>
+
 
         <div class="fixed-action-btn vertical click-to-toggle">
          <a class="btn-floating btn-large blue">
