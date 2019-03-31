@@ -26,7 +26,7 @@ $(document).ready(function(){
   });
 
   $(".btn-remove-question-of-test2").click(function(event){
-    console.log("eduardo");
+
   });
 
   function createTest(test) {
@@ -76,7 +76,7 @@ $(document).ready(function(){
 
   /*Criando uma nova questão*/
   function createQuestion(question) {
-    console.log(question);
+
     /*Criando questões de resposta curta ou verdadeiro ou falso*/
     if(question["type"] == "shortAnswer" || question["type"] == "trueOrFalse") {
       $question = $("<li />")
@@ -192,8 +192,17 @@ $(document).ready(function(){
       /*Melhore esta parte*/
       data: { number: number, easy: level[0], medium: level[1], hard: level[2], type: type},
       success: function(data) {
+          var codes = []
+          $("#questions-list li").each(function(index, value) {
+              codes.push($(this).children("input").val());
+          });
+
           for(index in data) {
-            $("#questions-list").append(createQuestion(data[index]));
+            if(codes.indexOf(data[index]["_id"])) {
+              $("#questions-list").append(createQuestion(data[index]));
+            } else {
+              console.log("Questão Repetida")
+            }
           }
       }
     });
@@ -216,7 +225,6 @@ $(document).ready(function(){
 
   /*Salvando teste*/
   function saveTest(name, description, questions, numAttempts, time) {
-      console.log("Ok");
       if(name) {
         $.ajax({
           url: URL + "/quiz/tests/",
