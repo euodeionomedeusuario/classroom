@@ -381,7 +381,9 @@ def get_test_by_id(class_id, test_id):
 
     test["questions"] = questions
 
-    return render_template("quiz/tests/answer_test.html", test=test, num_attempts=num_attempts)
+#    return render_template("quiz/tests/answer_test.html", test=test, num_attempts=num_attempts)
+    return render_template("novainterface.html", test=test, num_attempts=num_attempts)
+
 
 #retornando testes criados
 @app.route("/classroom/tests/", methods=["GET"])

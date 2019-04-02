@@ -1,9 +1,11 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 
 import os
 
-from flask import Flask
+from flask import Flask, render_template
+from flask import render_template, jsonify, request
+from bson.objectid import ObjectId
 from pymongo import MongoClient
 from flask_mail import Mail
 
@@ -29,6 +31,28 @@ db = client.quizdb
 
 #Configurações da aplicação
 app.config["SECRET_KEY"] = "SECRET_KEY"
+
+@app.route("/app/questions/<code>/")
+def app_get_question(code):
+    result = db.questions.find_one( {"_id": ObjectId(code)} )
+
+    if result["type"] == "multipleChoice":
+        question = {
+            "_id": str(result["_id"]),
+            "title": result["title"],
+            "type": result["type"],
+            "correctAnswer": result["correctAnswer"],
+            "choices": result["choices"]
+        }
+    else:
+        question = {
+            "_id": str(result["_id"]),
+            "title": result["title"],
+            "type": result["type"],
+            "correctAnswer": result["correctAnswer"]
+        }
+
+    return render_template("questions.html", question=question)
 
 #Importando rotas da aplicação
 from classroom.controllers import routes
